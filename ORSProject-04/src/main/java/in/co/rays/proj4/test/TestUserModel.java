@@ -127,24 +127,24 @@ public class TestUserModel {
 
 	        bean = it.next();
 
-	        System.out.println("ID              : " + bean.getId());
-	        System.out.println("First Name      : " + bean.getFirstName());
-	        System.out.println("Last Name       : " + bean.getLastName());
-	        System.out.println("Login           : " + bean.getLogin());
-	        System.out.println("Password        : " + bean.getPassword());
-	        System.out.println("DOB             : " + bean.getDob());
-	        System.out.println("Mobile No       : " + bean.getMobileNo());
-	        System.out.println("Role ID         : " + bean.getRoleId());
-	        System.out.println("Unsuccessfull Login : " + bean.getUnsuccessfullLogin());
-	        System.out.println("Gender          : " + bean.getGender());
-	        System.out.println("Last Login      : " + bean.getLastLogin());
-	        System.out.println("User Lock       : " + bean.getUserLock());
-	        System.out.println("Registered IP   : " + bean.getRegisteredIp());
-	        System.out.println("Last Login IP   : " + bean.getLastLoginIp());
-	        System.out.println("Created By      : " + bean.getCreatedBy());
-	        System.out.println("Modified By     : " + bean.getModifiedBy());
-	        System.out.println("Created Date    : " + bean.getCreatedDatetime());
-	        System.out.println("Modified Date   : " + bean.getModifiedDatetime());
+	        System.out.println(bean.getId());
+	        System.out.println(bean.getFirstName());
+	        System.out.println(bean.getLastName());
+	        System.out.println(bean.getLogin());
+	        System.out.println(bean.getPassword());
+	        System.out.println(bean.getDob());
+	        System.out.println(bean.getMobileNo());
+	        System.out.println(bean.getRoleId());
+	        System.out.println(bean.getUnsuccessfullLogin());
+	        System.out.println(bean.getGender());
+	        System.out.println(bean.getLastLogin());
+	        System.out.println(bean.getUserLock());
+	        System.out.println(bean.getRegisteredIp());
+	        System.out.println(bean.getLastLoginIp());
+	        System.out.println(bean.getCreatedBy());
+	        System.out.println(bean.getModifiedBy());
+	        System.out.println(bean.getCreatedDatetime());
+	        System.out.println(bean.getModifiedDatetime());
 
 	        System.out.println("-----------------------------------------");
 	    }
