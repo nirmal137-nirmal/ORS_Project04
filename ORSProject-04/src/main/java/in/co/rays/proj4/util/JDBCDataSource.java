@@ -10,14 +10,16 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;   // isme 2 design follow kr r
 //2.  provide Reliable Connection With DataBase.
 //3   Provide Maximum Connection limitation with DataBase.
 
-public final class JDBCDataSource { // make class final - singleton class
+public final class JDBCDataSource { // make class final - singleton class child nhi ban sake class ki 
+	
 
 	private static final JDBCDataSource jdbc = null; // self type ka attribute banaya - Make self type static variable ,
 														// static variable have only one copy in there life
 
 	private ComboPooledDataSource cpds = null; // combopool ka object bana diya - c3p0 ki dependency add kri hai
 												// tb hi access kr skte h.
-
+    // Combopooled Unvantage connection close kr deta hai 
+	
 	private static ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.proj4.bundle.System");
 
 	private JDBCDataSource() { // make a private constructor - ek hi bar call hoga

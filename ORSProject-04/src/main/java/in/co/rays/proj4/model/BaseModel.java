@@ -17,7 +17,7 @@ public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic T
 	public abstract long add(T bean) throws ApplicationException, DuplicateRecordException;
 
 	public abstract void update(T bean) throws ApplicationException, DuplicateRecordException;
-
+ 
 	public abstract String getWhereClause(T bean);
 
 	public abstract String getTable();

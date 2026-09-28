@@ -31,7 +31,7 @@ public class TestUserModel {
 		bean.setId(5);
 		bean.setFirstName("Vinay");
 		bean.setLastName("Patidar");
-		bean.setLogin("vinay");
+		bean.setLogin("vinay@gmail.com");
 		bean.setPassword("123456");
 		bean.setDob(sdf.parse("18-09-1997"));
 		bean.setLastLogin(sdf.parse("21-09-2026"));
