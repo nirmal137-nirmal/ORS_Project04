@@ -15,6 +15,12 @@ public class CourseModel extends BaseModel<CourseBean> {
 
 		Connection conn = null;
 		int pk = 0;
+		
+		CourseBean existBean = findByName(bean.getName());
+		
+		if(existBean != null) {
+			throw new DuplicateRecordException("name already exits");
+		}
 
 		try {
 			pk = nextPk();
@@ -46,6 +52,12 @@ public class CourseModel extends BaseModel<CourseBean> {
 	@Override
 	public void update(CourseBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
+		
+		CourseBean existBean = findByName(bean.getName());
+		
+		if(existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("name already exist");
+		}
 
 		try {
 			conn = JDBCDataSource.getConnection();
@@ -109,6 +121,14 @@ public class CourseModel extends BaseModel<CourseBean> {
 		}
 
 		return sql.toString();
+	}
+	
+	public CourseBean findByName(String name) {
+		
+		CourseBean bean = findByUniqueColumn("name", name);
+		
+		return bean;
+		
 	}
 
 	@Override

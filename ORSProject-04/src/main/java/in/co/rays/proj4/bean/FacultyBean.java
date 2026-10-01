@@ -92,7 +92,7 @@ public class FacultyBean extends BaseBean {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void setResultSet(ResultSet rs) {
 		try {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import in.co.rays.proj4.bean.MarksheetBean;
+import in.co.rays.proj4.bean.StudentBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
@@ -15,6 +16,17 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 
 		Connection conn = null;
 		int pk = 0;
+
+		MarksheetBean existBean = findByRollNo(bean.getRollNo());
+		if (existBean != null) {
+			throw new DuplicateRecordException("rollNo already exist");
+		}
+		
+		//Foreign key concept
+		StudentModel smodel = new StudentModel();
+		StudentBean sbean = smodel.findByPk(bean.getStudentId());
+		
+		//System.out.println("First Name = " + sbean.getFirstName());
 
 		try {
 
@@ -29,7 +41,9 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 			pstmt.setLong(1, pk);
 			pstmt.setString(2, bean.getRollNo());
 			pstmt.setLong(3, bean.getStudentId());
-			pstmt.setString(4, bean.getName());
+			//pstmt.setString(4, bean.getName());
+			//add first name
+			pstmt.setString(4, sbean.getFirstName());
 			pstmt.setInt(5, bean.getPhysics());
 			pstmt.setInt(6, bean.getChemistry());
 			pstmt.setInt(7, bean.getMaths());
@@ -61,6 +75,15 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 	public void update(MarksheetBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
+		
+		MarksheetBean existBean = findByRollNo(bean.getRollNo());
+		if(existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("Rollno already exist");
+		}
+		
+		//Foreign key concept
+		StudentModel smodel = new StudentModel();
+		StudentBean sbean = smodel.findByPk(bean.getStudentId());
 
 		try {
 
@@ -73,7 +96,9 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 			pstmt.setString(1, bean.getRollNo());
 			pstmt.setLong(2, bean.getStudentId());
 			pstmt.setString(3, bean.getName());
-			pstmt.setInt(4, bean.getPhysics());
+			//pstmt.setString(4, bean.getName());
+			//add first name
+			pstmt.setString(4, sbean.getFirstName());
 			pstmt.setInt(5, bean.getChemistry());
 			pstmt.setInt(6, bean.getMaths());
 			pstmt.setString(7, bean.getCreatedBy());
@@ -101,29 +126,29 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 
 	@Override
 	public String getWhereClause(MarksheetBean bean) {
-		
+
 		StringBuffer sql = new StringBuffer();
-		
-		if(bean != null) {
-			if(bean.getId() > 0) {
+
+		if (bean != null) {
+			if (bean.getId() > 0) {
 				sql.append(" and id = " + bean.getId());
 			}
-			if(bean.getRollNo() != null && bean.getRollNo().length() > 0) {
+			if (bean.getRollNo() != null && bean.getRollNo().length() > 0) {
 				sql.append(" and roll_no like '" + bean.getRollNo() + "%'");
 			}
-			if(bean.getStudentId() > 0) {
+			if (bean.getStudentId() > 0) {
 				sql.append(" and student_id = " + bean.getStudentId());
 			}
-			if(bean.getName() != null && bean.getName().length() > 0) {
+			if (bean.getName() != null && bean.getName().length() > 0) {
 				sql.append(" and name like '" + bean.getName() + "%'");
 			}
-			if(bean.getPhysics() > 0 ) {
+			if (bean.getPhysics() > 0) {
 				sql.append(" and physics = " + bean.getPhysics());
 			}
-			if(bean.getChemistry() > 0) {
+			if (bean.getChemistry() > 0) {
 				sql.append(" and chemistry = " + bean.getChemistry());
 			}
-			if(bean.getMaths() > 0 ) {
+			if (bean.getMaths() > 0) {
 				sql.append(" and maths = " + bean.getMaths());
 			}
 			if (bean.getCreatedBy() != null && bean.getCreatedBy().length() > 0) {
@@ -141,6 +166,12 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public MarksheetBean findByRollNo(String rollNo) {
+		MarksheetBean bean = findByUniqueColumn("roll_No", rollNo);
+		return bean;
+
 	}
 
 	@Override

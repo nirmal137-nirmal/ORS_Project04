@@ -22,10 +22,10 @@ public class TestRoleModel {
 	public static void main(String[] args) {
 		
 		//testAdd();
-		//testUpdate();
+		testUpdate();
 		//testDelete();
 		//testFindByPK();
-		testSearch();
+		//testSearch();
 		
 	}
 	
@@ -33,11 +33,11 @@ public class TestRoleModel {
 		
 		RoleBean bean = new RoleBean();
 		
-		bean.setId(1);
-		bean.setName("Admin");
-		bean.setDescription("Admin role");
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setId(5);
+		bean.setName("KIOSk");
+		bean.setDescription("KIOSk role");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 		
@@ -48,11 +48,11 @@ public class TestRoleModel {
 		
 		RoleBean bean = new RoleBean();
 		
-		bean.setId(2);
-		bean.setName("Student");
-		bean.setDescription("Student role");
-		bean.setCreatedBy("nirmal");
-		bean.setModifiedBy("nirmal");
+		bean.setId(1);
+		bean.setName("Admin");
+		bean.setDescription("Admin role");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 		

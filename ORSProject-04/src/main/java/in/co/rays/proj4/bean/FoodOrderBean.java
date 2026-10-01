@@ -1,7 +1,6 @@
 package in.co.rays.proj4.bean;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class FoodOrderBean extends BaseBean {
 

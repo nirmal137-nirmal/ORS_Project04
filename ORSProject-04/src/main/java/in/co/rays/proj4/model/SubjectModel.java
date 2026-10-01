@@ -3,6 +3,8 @@ package in.co.rays.proj4.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import in.co.rays.proj4.bean.CourseBean;
+import in.co.rays.proj4.bean.StudentBean;
 import in.co.rays.proj4.bean.SubjectBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -16,6 +18,16 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		SubjectBean existBean = findByName(bean.getName());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Student name already exist");
+		}
+		// Foreign key concept
+		CourseModel cmodel = new CourseModel();
+		CourseBean cbean = cmodel.findByPk(bean.getCourseId());
+		// System.out.println("Course Name = " + cbean.getName());
+
 		try {
 
 			pk = nextPk();
@@ -26,7 +38,9 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 			PreparedStatement pstmt = conn.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?,?)");
 
 			pstmt.setLong(1, pk);
-			pstmt.setString(2, bean.getName());
+			// add cbean
+			// pstmt.setString(2, bean.getName());
+			pstmt.setString(2, cbean.getName());
 			pstmt.setString(3, bean.getDescription());
 			pstmt.setLong(4, bean.getCourseId());
 			pstmt.setString(5, bean.getCreatedBy());
@@ -58,6 +72,18 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 
 		Connection conn = null;
 
+		SubjectBean existBean = findByName(bean.getName());
+
+		if (existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("name already exist");
+		}
+
+		// Foreign key concept
+		CourseModel cmodel = new CourseModel();
+		CourseBean cbean = cmodel.findByPk(bean.getCourseId());
+
+		// System.out.println("Course name = " + cbean.getName());
+
 		try {
 
 			conn = JDBCDataSource.getConnection();
@@ -66,7 +92,8 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 			PreparedStatement pstmt = conn.prepareStatement("update " + getTable()
 					+ " set name=?, description=?, course_id=?, created_by=?, modified_by=?, created_datetime=?, modified_datetime=? where id=?");
 
-			pstmt.setString(1, bean.getName());
+			// pstmt.setString(1, bean.getName());
+			pstmt.setString(1, cbean.getName());
 			pstmt.setString(2, bean.getDescription());
 			pstmt.setLong(3, bean.getCourseId());
 			pstmt.setString(4, bean.getCreatedBy());
@@ -126,6 +153,13 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public SubjectBean findByName(String name) {
+
+		SubjectBean bean = findByUniqueColumn("name", name);
+		return bean;
+
 	}
 
 	@Override

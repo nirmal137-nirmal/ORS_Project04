@@ -16,10 +16,10 @@ public class TestUserModel {
 	public static void main(String[] args) throws Exception {
 
 		//testAdd();
-		// testUpdate();
+		 testUpdate();
 		// testDelete();
 		//testFindByPk();
-		testSearch();
+		//testSearch();
 
 	}
 
@@ -55,7 +55,7 @@ public class TestUserModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		UserBean bean = new UserBean();
 
-		bean.setId(1);
+		bean.setId(2);
 		bean.setFirstName("Nirmal");
 		bean.setLastName("Fayake");
 		bean.setLogin("nirmal@gmail.com");

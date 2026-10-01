@@ -15,21 +15,21 @@ public class TestCollegeModel {
 	public static void main(String[] args) {
 		
 		//testAdd();
-		//testUpdate();
+		testUpdate();
 		//testDelete();
 		//testFindByPk();
-		testSearch();
+		//testSearch();
 	}
 	
 	private static void testAdd() {
 		
 		CollegeBean bean = new CollegeBean();
 		
-		bean.setId(3);
-		bean.setName("Nirmal Fayake");
-		bean.setAddress("Nipania");
+		bean.setId(11);
+		bean.setName("Thakur Shiv Kumar");
+		bean.setAddress("Burhanpur");
 		bean.setState("Madhya Pradesh");
-		bean.setCity("Indore");
+		bean.setCity("Burhanpur");
 		bean.setPhoneNo("9753570572");
 		bean.setCreatedBy("Nirmal");
 		bean.setModifiedBy("Nirmal");
@@ -44,12 +44,12 @@ public class TestCollegeModel {
 		
 		CollegeBean bean = new CollegeBean();
 		
-		bean.setId(1);
-		bean.setName("Rupesh Mahajan");
-		bean.setAddress("Ubale Nagar");
-		bean.setState("Maharashtra");
-		bean.setCity("Pune");
-		bean.setPhoneNo("9617382689");
+		bean.setId(11);
+		bean.setName("Thakur Shiv Kumar");
+		bean.setAddress("Burhanpur");
+		bean.setState("Madhya Pradesh");
+		bean.setCity("Burhanpur");
+		bean.setPhoneNo("9753570572");
 		bean.setCreatedBy("Nirmal");
 		bean.setModifiedBy("Nirmal");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));

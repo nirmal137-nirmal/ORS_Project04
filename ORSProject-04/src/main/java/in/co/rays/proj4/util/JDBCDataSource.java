@@ -18,7 +18,7 @@ public final class JDBCDataSource { // make class final - singleton class child 
 
 	private ComboPooledDataSource cpds = null; // combopool ka object bana diya - c3p0 ki dependency add kri hai
 												// tb hi access kr skte h.
-    // Combopooled Unvantage connection close kr deta hai 
+    // combopooled unvantage connection close kr deta hai 
 	
 	private static ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.proj4.bundle.System");
 

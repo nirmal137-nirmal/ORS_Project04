@@ -15,6 +15,11 @@ public class RoleModel extends BaseModel<RoleBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		RoleBean existBean = findByName(bean.getName());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("role name already exist");
+		}
 		try {
 			pk = nextPk();
 			conn = JDBCDataSource.getConnection();
@@ -45,6 +50,12 @@ public class RoleModel extends BaseModel<RoleBean> {
 	@Override
 	public void update(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
+		
+		RoleBean exitsBean = findByName(bean.getName());
+		
+		if(exitsBean != null && exitsBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("name already exist");
+		}
 
 		try {
 			conn = JDBCDataSource.getConnection();
@@ -101,6 +112,13 @@ public class RoleModel extends BaseModel<RoleBean> {
 			}
 		}
 		return sql.toString();
+	}
+
+	public RoleBean findByName(String name) {
+
+		RoleBean bean = findByUniqueColumn("name", name);
+		return bean;
+
 	}
 
 	@Override

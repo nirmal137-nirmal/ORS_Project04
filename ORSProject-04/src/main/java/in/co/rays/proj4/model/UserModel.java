@@ -3,6 +3,7 @@ package in.co.rays.proj4.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -16,6 +17,17 @@ public class UserModel extends BaseModel<UserBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		UserBean existBean = findByLogin(bean.getLogin());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("login already exist");
+		}
+		
+		/*
+		 * RoleModel rmodel = new RoleModel(); RoleBean rbean =
+		 * rmodel.findByPk(bean.getId());
+		 */
+		
 		try {
 
 			pk = nextPk();
@@ -68,6 +80,12 @@ public class UserModel extends BaseModel<UserBean> {
 	public void update(UserBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
+		
+		UserBean existBean = findByLogin(bean.getLogin());
+
+		if (existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("login already exist");
+		}
 
 		try {
 
@@ -198,6 +216,25 @@ public class UserModel extends BaseModel<UserBean> {
 		}
 
 		return sql.toString();
+	}
+
+	// find by
+	public UserBean findByLogin(String login) {
+
+		UserBean bean = findByUniqueColumn("login", login);
+
+		return bean;
+	}
+
+	// Authenticate method
+	public UserBean authenticate(String login, String password) {
+
+		UserBean bean = findByLogin(login);
+
+		if (bean != null && bean.getPassword().equals(password)) {
+			return bean;
+		}
+		return null;
 	}
 
 	@Override

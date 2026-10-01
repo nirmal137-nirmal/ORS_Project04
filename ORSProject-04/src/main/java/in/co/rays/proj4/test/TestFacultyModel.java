@@ -15,11 +15,11 @@ public class TestFacultyModel {
 
 	public static void main(String[] args) throws Exception {
 
-		//testAdd();
-		 //testUpdate();
+		testAdd();
+		// testUpdate();
 		// testDelete();
 		//testFindByPk();
-		testSearch();
+		//testSearch();
 
 	}
 
@@ -28,18 +28,18 @@ public class TestFacultyModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		FacultyBean bean = new FacultyBean();
 
-		bean.setId(1);
+		bean.setId(6);
 		bean.setCollegeId(1);
-		bean.setCollegeName("SVVV");
-		bean.setFirstName("Nirmal");
-		bean.setLastName("Fayake");
-		bean.setEmail("nirmal@gmail.com");
-		bean.setMobileNo("9753570572");
+		//bean.setCollegeName(2);
+		bean.setFirstName("Mridul");
+		bean.setLastName("Sharma");
+		bean.setEmail("mridul@gmail.com");
+		bean.setMobileNo("9754875203");
 		bean.setAddress("Indore");
 		bean.setGender("Male");
 		bean.setDateOfBirth(sdf.parse("13-07-2001"));
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
@@ -51,18 +51,18 @@ public class TestFacultyModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		FacultyBean bean = new FacultyBean();
 
-		bean.setId(1);
+		bean.setId(6);
 		bean.setCollegeId(1);
-		bean.setCollegeName("SVVV");
-		bean.setFirstName("Nirmal");
-		bean.setLastName("Fayake");
-		bean.setEmail("nirmal13@gmail.com");
-		bean.setMobileNo("9753570572");
+		//bean.setCollegeName(2);
+		bean.setFirstName("Mridul");
+		bean.setLastName("Sharma");
+		bean.setEmail("mridul@gmail.com");
+		bean.setMobileNo("9754875203");
 		bean.setAddress("Indore");
 		bean.setGender("Male");
 		bean.setDateOfBirth(sdf.parse("13-07-2001"));
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 

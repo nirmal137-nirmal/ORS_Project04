@@ -3,6 +3,7 @@ package in.co.rays.proj4.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.bean.FacultyBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -16,6 +17,16 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		FacultyBean existBean = findByEmail(bean.getEmail());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("email already exist");
+		}
+
+		// Foreign key concept
+		CollegeModel fmodel = new CollegeModel();
+		CollegeBean fbean = fmodel.findByPk(bean.getCollegeId());
+
 		try {
 
 			pk = nextPk();
@@ -28,7 +39,9 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 
 			pstmt.setLong(1, pk);
 			pstmt.setLong(2, bean.getCollegeId());
-			pstmt.setString(3, bean.getCollegeName());
+			// add cbean in this
+			//pstmt.setString(3, bean.getCollegeName());
+			pstmt.setString(3, fbean.getName());
 			pstmt.setString(4, bean.getFirstName());
 			pstmt.setString(5, bean.getLastName());
 			pstmt.setString(6, bean.getEmail());
@@ -65,6 +78,16 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 
 		Connection conn = null;
 
+		FacultyBean existBean = findByEmail(bean.getEmail());
+
+		if (existBean != null && existBean.getEmail() != bean.getEmail()) {
+			throw new DuplicateRecordException("email already exist");
+		}
+
+		// Foreign key concept
+		CollegeModel cmodel = new CollegeModel();
+		CollegeBean cbean = cmodel.findByPk(bean.getCollegeId());
+
 		try {
 
 			conn = JDBCDataSource.getConnection();
@@ -75,7 +98,9 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 
 			pstmt.setLong(1, bean.getCollegeId());
 			pstmt.setString(2, bean.getCollegeName());
-			pstmt.setString(3, bean.getFirstName());
+			// add cbean
+			//pstmt.setString(3, bean.getCollegeName());
+			pstmt.setString(3, cbean.getName());
 			pstmt.setString(4, bean.getLastName());
 			pstmt.setString(5, bean.getEmail());
 			pstmt.setString(6, bean.getMobileNo());
@@ -157,6 +182,13 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public FacultyBean findByEmail(String email) {
+
+		FacultyBean bean = findByUniqueColumn("email", email);
+
+		return bean;
 	}
 
 	@Override

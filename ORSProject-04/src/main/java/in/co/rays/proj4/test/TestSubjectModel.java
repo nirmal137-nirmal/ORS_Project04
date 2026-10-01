@@ -14,11 +14,11 @@ public class TestSubjectModel {
 
 	public static void main(String[] args) {
 
-		//testAdd();
-		 //testUpdate();
+		// testAdd();
+		testUpdate();
 		// testDelete();
-		//testFindByPk();
-		testSearch();
+		// testFindByPk();
+		// testSearch();
 
 	}
 
@@ -26,12 +26,12 @@ public class TestSubjectModel {
 
 		SubjectBean bean = new SubjectBean();
 
-		bean.setId(2);
-		bean.setName("Python");
-		bean.setDescription("Python Programming");
-		bean.setCourseId(5);
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setId(6);
+		// bean.setName("Spring Boot ");
+		bean.setDescription("Learn Spring Boot FrameWork");
+		bean.setCourseId(3);
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
@@ -42,12 +42,12 @@ public class TestSubjectModel {
 
 		SubjectBean bean = new SubjectBean();
 
-		bean.setId(2);
-		bean.setName("C, C++");
+		bean.setId(5);
+		// bean.setName("C, C++");
 		bean.setDescription("C programming");
 		bean.setCourseId(2);
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
@@ -58,7 +58,7 @@ public class TestSubjectModel {
 
 		model.delete(3);
 	}
-	
+
 	private static void testFindByPk() {
 
 		SubjectBean bean = model.findByPk(1);
@@ -72,7 +72,7 @@ public class TestSubjectModel {
 		System.out.println(bean.getCreatedDatetime());
 		System.out.println(bean.getModifiedDatetime());
 	}
-	
+
 	private static void testSearch() {
 
 		SubjectBean bean = new SubjectBean();

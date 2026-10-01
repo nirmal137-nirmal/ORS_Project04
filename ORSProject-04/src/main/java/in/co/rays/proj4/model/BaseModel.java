@@ -23,7 +23,9 @@ public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic T
 	public abstract String getTable();
 
 	public abstract T getBean();
-
+	
+	
+     //Find By PK
 	public Integer nextPk() throws DatabaseException {
 
 		Connection conn = null;
@@ -50,6 +52,7 @@ public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic T
 
 	}
 
+	// Delete Method 
 	public void delete(int id) {
 		Connection conn = null;
 
@@ -130,6 +133,32 @@ public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic T
 
 		return list;
 
+	}
+	
+	// find By UniqueColumn // Bussiness Validation
+	public T findByUniqueColumn(String column, String Value) {
+		Connection conn = null;
+		T bean = null;
+		
+		try {
+			conn = JDBCDataSource.getConnection();
+			
+			PreparedStatement pstmt = conn.prepareStatement("select * from " + getTable() + " where " + column + " = ?");
+			
+			pstmt.setString(1, Value);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				bean = getBean();
+				bean.setResultSet(rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCDataSource.closeConnection(conn);
+		}
+		return bean;
 	}
 
 }

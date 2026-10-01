@@ -16,11 +16,11 @@ public class TestStudentModel {
 
 	public static void main(String[] args) throws Exception {
 
-		//testAdd();
+		testAdd();
 		//testUpdate();
 		// testDelete();
-		//testFindByPk();
-		testSearch();
+		// testFindByPk();
+		// testSearch();
 
 	}
 
@@ -29,16 +29,14 @@ public class TestStudentModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		StudentBean bean = new StudentBean();
 
-		bean.setId(1);
-		bean.setCollegeId(1);
-		bean.setCollegeName("SVVV");
+		bean.setCollegeId(2);
 		bean.setFirstName("Sakshi");
 		bean.setLastName("Vyas");
-        bean.setDateOfBirth(sdf.parse("30-02-2001"));
+		bean.setDateOfBirth(sdf.parse("30-02-2001"));
 		bean.setMobileNo("3692587410");
 		bean.setEmail("shakshi@gmail.com");
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
@@ -50,16 +48,15 @@ public class TestStudentModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		StudentBean bean = new StudentBean();
 
-		bean.setId(5);
-		bean.setCollegeId(1);
-		bean.setCollegeName("SVVV");
-		bean.setFirstName("Vinay");
-		bean.setLastName("Patidar");
-        bean.setDateOfBirth(sdf.parse("30-02-2001"));
+		bean.setId(6);
+		bean.setCollegeId(2);
+		bean.setFirstName("Sakshi");
+		bean.setLastName("Vyas");
+		bean.setDateOfBirth(sdf.parse("30-02-2001"));
 		bean.setMobileNo("3692587410");
-		bean.setEmail("vinay@gmail.com");
-		bean.setCreatedBy("Nirmal");
-		bean.setModifiedBy("Nirmal");
+		bean.setEmail("shakshi@gmail.com");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
@@ -70,11 +67,11 @@ public class TestStudentModel {
 
 		model.delete(6);
 	}
-	
+
 	private static void testFindByPk() {
-		
+
 		StudentBean bean = model.findByPk(1);
-		
+
 		System.out.println(bean.getCollegeId());
 		System.out.println(bean.getCollegeName());
 		System.out.println(bean.getFirstName());
@@ -86,21 +83,20 @@ public class TestStudentModel {
 		System.out.println(bean.getModifiedBy());
 		System.out.println(bean.getCreatedDatetime());
 		System.out.println(bean.getModifiedDatetime());
-		
-		
+
 	}
-	
+
 	private static void testSearch() {
 		StudentBean bean = new StudentBean();
-		
+
 		List<StudentBean> list = model.search(bean, 1, 5);
-		
+
 		Iterator<StudentBean> it = list.iterator();
-		
+
 		while (it.hasNext()) {
-			
+
 			bean = it.next();
-			
+
 			System.out.println(bean.getCollegeId());
 			System.out.println(bean.getCollegeName());
 			System.out.println(bean.getFirstName());
@@ -112,9 +108,9 @@ public class TestStudentModel {
 			System.out.println(bean.getModifiedBy());
 			System.out.println(bean.getCreatedDatetime());
 			System.out.println(bean.getModifiedDatetime());
-			
+
 			System.out.println("-------------------------------");
-			
+
 		}
 	}
 }

@@ -3,6 +3,7 @@ package in.co.rays.proj4.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.bean.StudentBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -16,6 +17,19 @@ public class StudentModel extends BaseModel<StudentBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		StudentBean existBean = findByEmail(bean.getEmail());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("email already exist");
+		}
+
+		// Foreign key concept
+
+		CollegeModel cmodel = new CollegeModel();
+		CollegeBean cbean = cmodel.findByPk(bean.getCollegeId());
+
+		// System.out.println("college name = " + cbean.getName());
+
 		try {
 
 			pk = nextPk();
@@ -28,7 +42,9 @@ public class StudentModel extends BaseModel<StudentBean> {
 
 			pstmt.setLong(1, pk);
 			pstmt.setLong(2, bean.getCollegeId());
-			pstmt.setString(3, bean.getCollegeName());
+			// pstmt.setString(3, bean.getCollegeName());
+			// Foreign key concept
+			pstmt.setString(3, cbean.getName());
 			pstmt.setString(4, bean.getFirstName());
 			pstmt.setString(5, bean.getLastName());
 			pstmt.setDate(6, new java.sql.Date(bean.getDateOfBirth().getTime()));
@@ -63,6 +79,16 @@ public class StudentModel extends BaseModel<StudentBean> {
 
 		Connection conn = null;
 
+		StudentBean existBean = findByEmail(bean.getEmail());
+		if (existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("email already exist");
+		}
+		// Foreign key concept
+
+		CollegeModel cmodel = new CollegeModel();
+		CollegeBean cbean = cmodel.findByPk(bean.getCollegeId());
+		//System.out.println("college name = " + cbean.getName());
+
 		try {
 
 			conn = JDBCDataSource.getConnection();
@@ -72,7 +98,9 @@ public class StudentModel extends BaseModel<StudentBean> {
 					+ " set college_id=?, college_name=?, first_name=?, last_name=?, date_of_birth=?, mobile_no=?, email=?, created_by=?, modified_by=?, created_datetime=?, modified_datetime=? where id=?");
 
 			pstmt.setLong(1, bean.getCollegeId());
-			pstmt.setString(2, bean.getCollegeName());
+			pstmt.setString(2, cbean.getName());
+			// pstmt.setString(3, bean.getCollegeName());
+			// Foreign key concept
 			pstmt.setString(3, bean.getFirstName());
 			pstmt.setString(4, bean.getLastName());
 			pstmt.setDate(5, new java.sql.Date(bean.getDateOfBirth().getTime()));
@@ -103,11 +131,11 @@ public class StudentModel extends BaseModel<StudentBean> {
 
 	@Override
 	public String getWhereClause(StudentBean bean) {
-		
+
 		StringBuffer sql = new StringBuffer("");
-		
+
 		if (bean != null) {
-			if(bean.getCollegeId() > 0) {
+			if (bean.getCollegeId() > 0) {
 				sql.append(" and college_id = " + bean.getCollegeId());
 			}
 			if (bean.getCollegeName() != null && bean.getCollegeName().length() > 0) {
@@ -119,11 +147,11 @@ public class StudentModel extends BaseModel<StudentBean> {
 			if (bean.getLastName() != null && bean.getLastName().length() > 0) {
 				sql.append(" and last_name like '" + bean.getLastName() + "%'");
 			}
-			if (bean.getDateOfBirth() != null ) {
-				sql.append(" and date_of_birth '" + bean.getDateOfBirth() + "'");			
+			if (bean.getDateOfBirth() != null) {
+				sql.append(" and date_of_birth '" + bean.getDateOfBirth() + "'");
 			}
 			if (bean.getMobileNo() != null && bean.getMobileNo().length() > 0) {
-				sql.append(" and mobile_no like '" + bean.getMobileNo() + "%'" );
+				sql.append(" and mobile_no like '" + bean.getMobileNo() + "%'");
 			}
 			if (bean.getEmail() != null && bean.getEmail().length() > 0) {
 				sql.append(" and email like '" + bean.getEmail() + "%'");
@@ -143,6 +171,13 @@ public class StudentModel extends BaseModel<StudentBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public StudentBean findByEmail(String email) {
+
+		StudentBean bean = findByUniqueColumn("email", email);
+
+		return bean;
 	}
 
 	@Override

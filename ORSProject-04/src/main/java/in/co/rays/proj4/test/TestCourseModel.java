@@ -15,10 +15,10 @@ public class TestCourseModel {
 	public static void main(String[] args) {
 
 		//testAdd();
-		// testUpdate();
+		 testUpdate();
 		// testDelete();
 		//testFindByPk();
-		testSearch();
+		//testSearch();
 	}
 	
 	private static void testAdd() {
@@ -41,7 +41,7 @@ public class TestCourseModel {
 		
 		CourseBean bean = new CourseBean();
 		
-		bean.setId(1);
+		bean.setId(9);
 		bean.setName("MCA");
 		bean.setDescription("Master's");
 		bean.setDuration("2 years");
