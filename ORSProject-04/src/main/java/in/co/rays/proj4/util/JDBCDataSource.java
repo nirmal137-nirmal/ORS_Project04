@@ -1,7 +1,6 @@
 package in.co.rays.proj4.util;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;   // isme 2 design follow kr rahe hai singleton or factory design -- ye connection pe hi rha hai 
