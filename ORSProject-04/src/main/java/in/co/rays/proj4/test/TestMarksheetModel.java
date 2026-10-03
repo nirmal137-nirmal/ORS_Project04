@@ -14,8 +14,8 @@ public class TestMarksheetModel {
 
 	public static void main(String[] args) {
 
-		testAdd();
-		//testUpdate();
+		//testAdd();
+		testUpdate();
 		//testDelete();
 		//testFindBypk();
 		//testSearch();
@@ -26,9 +26,9 @@ public class TestMarksheetModel {
 
 		MarksheetBean bean = new MarksheetBean();
 
-		bean.setId(6);
-		bean.setRollNo("1006");
-		bean.setStudentId(1);
+		bean.setId(7);
+		bean.setRollNo("1007");
+		bean.setStudentId(6);
 		//bean.setName("Manoj Choudhary");
 		bean.setPhysics(70);
 		bean.setChemistry(60);
@@ -45,11 +45,11 @@ public class TestMarksheetModel {
 
 		MarksheetBean bean = new MarksheetBean();
 
-		bean.setId(1);
+		bean.setId(7);
 
-		bean.setRollNo("1002");
-		bean.setStudentId(1);
-		bean.setName("Rahul Sharma");
+		bean.setRollNo("1007");
+		bean.setStudentId(6);
+		//bean.setName("Rahul Sharma");
 		bean.setPhysics(90);
 		bean.setChemistry(92);
 		bean.setMaths(98);

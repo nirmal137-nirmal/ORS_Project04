@@ -43,7 +43,7 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 			pstmt.setLong(3, bean.getStudentId());
 			//pstmt.setString(4, bean.getName());
 			//add first name
-			pstmt.setString(4, sbean.getFirstName());
+			pstmt.setString(4, sbean.getFirstName() + " " + sbean.getLastName());
 			pstmt.setInt(5, bean.getPhysics());
 			pstmt.setInt(6, bean.getChemistry());
 			pstmt.setInt(7, bean.getMaths());
@@ -72,56 +72,71 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 	}
 
 	@Override
-	public void update(MarksheetBean bean) throws ApplicationException, DuplicateRecordException {
+	public void update(MarksheetBean bean)
+	        throws ApplicationException, DuplicateRecordException {
 
-		Connection conn = null;
-		
-		MarksheetBean existBean = findByRollNo(bean.getRollNo());
-		if(existBean != null && existBean.getId() != bean.getId()) {
-			throw new DuplicateRecordException("Rollno already exist");
-		}
-		
-		//Foreign key concept
-		StudentModel smodel = new StudentModel();
-		StudentBean sbean = smodel.findByPk(bean.getStudentId());
+	    Connection conn = null;
 
-		try {
+	    MarksheetBean existBean = findByRollNo(bean.getRollNo());
 
-			conn = JDBCDataSource.getConnection();
-			conn.setAutoCommit(false);
+	    if (existBean != null && existBean.getId() != bean.getId()) {
+	        throw new DuplicateRecordException("Rollno already exist");
+	    }
 
-			PreparedStatement pstmt = conn.prepareStatement("update " + getTable()
-					+ " set roll_no=?, student_id=?, name=?, physics=?, chemistry=?, maths=?, created_by=?, modified_by=?, created_datetime=?, modified_datetime=? where id=?");
+	    // Foreign key concept
+	    StudentModel smodel = new StudentModel();
+	    StudentBean sbean = smodel.findByPk(bean.getStudentId());
 
-			pstmt.setString(1, bean.getRollNo());
-			pstmt.setLong(2, bean.getStudentId());
-			pstmt.setString(3, bean.getName());
-			//pstmt.setString(4, bean.getName());
-			//add first name
-			pstmt.setString(4, sbean.getFirstName());
-			pstmt.setInt(5, bean.getChemistry());
-			pstmt.setInt(6, bean.getMaths());
-			pstmt.setString(7, bean.getCreatedBy());
-			pstmt.setString(8, bean.getModifiedBy());
-			pstmt.setTimestamp(9, bean.getCreatedDatetime());
-			pstmt.setTimestamp(10, bean.getModifiedDatetime());
-			pstmt.setLong(11, bean.getId());
+	    if (sbean == null) {
+	        throw new ApplicationException("Student not found");
+	    }
 
-			pstmt.executeUpdate();
+	    try {
 
-			conn.commit();
+	        conn = JDBCDataSource.getConnection();
+	        conn.setAutoCommit(false);
 
-			System.out.println("Marksheet Record Updated Successfully");
+	        PreparedStatement pstmt = conn.prepareStatement(
+	            "update " + getTable()
+	            + " set roll_no=?, student_id=?, name=?, physics=?, chemistry=?, maths=?, "
+	            + "created_by=?, modified_by=?, created_datetime=?, modified_datetime=? "
+	            + "where id=?"
+	        );
 
-		} catch (Exception e) {
+	        pstmt.setString(1, bean.getRollNo());
+	        pstmt.setLong(2, bean.getStudentId());
 
-			e.printStackTrace();
-			JDBCDataSource.trnRollBack(conn);
+	        // First Name + Last Name
+	        pstmt.setString(3,
+	                sbean.getFirstName() + " " + sbean.getLastName());
 
-		} finally {
+	        pstmt.setInt(4, bean.getPhysics());
+	        pstmt.setInt(5, bean.getChemistry());
+	        pstmt.setInt(6, bean.getMaths());
 
-			JDBCDataSource.closeConnection(conn);
-		}
+	        pstmt.setString(7, bean.getCreatedBy());
+	        pstmt.setString(8, bean.getModifiedBy());
+
+	        pstmt.setTimestamp(9, bean.getCreatedDatetime());
+	        pstmt.setTimestamp(10, bean.getModifiedDatetime());
+
+	        pstmt.setLong(11, bean.getId());
+
+	        pstmt.executeUpdate();
+
+	        conn.commit();
+
+	        System.out.println("Marksheet Record Updated Successfully");
+
+	    } catch (Exception e) {
+
+	        e.printStackTrace();
+	        JDBCDataSource.trnRollBack(conn);
+
+	    } finally {
+
+	        JDBCDataSource.closeConnection(conn);
+	    }
 	}
 
 	@Override
