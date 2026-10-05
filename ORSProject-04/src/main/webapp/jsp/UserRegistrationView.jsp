@@ -8,6 +8,11 @@
 </head>
 <body>
 
+	<%
+	String succ = ServletUtility.getSuccessMessage(request);
+	String error = ServletUtility.getErrorMessage(request);
+	%>
+
 	<%@ include file="Header.jsp"%>
 
 	<form action="<%=ORSView.USER_REGISTRATION_CTL%>" method="post">
@@ -15,6 +20,9 @@
 		<div align="center">
 
 			<h1>Registration</h1>
+
+			<h3 style="color: green"><%=succ%></h3>
+			<h3 style="color: red"><%=error%></h3>
 
 			<table>
 
@@ -26,7 +34,7 @@
 				</tr>
 
 				<tr>
-					<th align="left" >LastName<font color="red">*</font></th>
+					<th align="left">LastName<font color="red">*</font></th>
 					<td><input type="text" name="lastName" value=""
 						placeholder="enter your lastName"></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("lastName", request)%></td>

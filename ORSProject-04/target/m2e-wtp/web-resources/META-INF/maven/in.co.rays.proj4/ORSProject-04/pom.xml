@@ -20,6 +20,14 @@
 	<dependencies>
 
 		<!-- Servlet API (provided by Tomcat 11 at runtime) -->
+
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.5</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
@@ -156,5 +164,5 @@
 		</plugins>
 
 	</build>
-	
+
 </project>

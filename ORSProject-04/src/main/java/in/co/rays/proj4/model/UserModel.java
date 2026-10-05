@@ -47,7 +47,8 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setLong(8, bean.getRoleId());
 			pstmt.setInt(9, bean.getUnsuccessfullLogin());
 			pstmt.setString(10, bean.getGender());
-			pstmt.setDate(11, new java.sql.Date(bean.getLastLogin().getTime()));
+			//pstmt.setDate(11, new java.sql.Date(bean.getLastLogin().getTime()));
+			pstmt.setTimestamp(11, bean.getLastLogin());
 			pstmt.setString(12, bean.getUserLock());
 			pstmt.setString(13, bean.getRegisteredIp());
 			pstmt.setString(14, bean.getLastLoginIp());
@@ -107,7 +108,8 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setLong(7, bean.getRoleId());
 			pstmt.setInt(8, bean.getUnsuccessfullLogin());
 			pstmt.setString(9, bean.getGender());
-			pstmt.setDate(10, new java.sql.Date(bean.getLastLogin().getTime()));
+			//pstmt.setDate(10, new java.sql.Date(bean.getLastLogin().getTime()));
+			pstmt.setTimestamp(10, bean.getLastLogin());
 			pstmt.setString(11, bean.getUserLock());
 			pstmt.setString(12, bean.getRegisteredIp());
 			pstmt.setString(13, bean.getLastLoginIp());

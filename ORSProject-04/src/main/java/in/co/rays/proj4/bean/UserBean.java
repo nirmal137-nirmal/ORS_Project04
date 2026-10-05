@@ -1,6 +1,7 @@
 package in.co.rays.proj4.bean;
 
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserBean extends BaseBean {
@@ -9,12 +10,13 @@ public class UserBean extends BaseBean {
 	private String lastName;
 	private String login;
 	private String password;
+	private String confirmPassword;
 	private Date dob;
 	private String mobileNo;
 	private long roleId;
 	private int unsuccessfullLogin;
-	private String gender;	
-	private Date lastLogin;
+	private String gender;
+	private Timestamp lastLogin;
 	private String userLock;
 	private String registeredIp;
 	private String lastLoginIp;
@@ -49,6 +51,14 @@ public class UserBean extends BaseBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public Date getDob() {
@@ -91,11 +101,11 @@ public class UserBean extends BaseBean {
 		this.gender = gender;
 	}
 
-	public Date getLastLogin() {
+	public Timestamp getLastLogin() {
 		return lastLogin;
 	}
 
-	public void setLastLogin(Date lastLogin) {
+	public void setLastLogin(Timestamp lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 
@@ -128,10 +138,10 @@ public class UserBean extends BaseBean {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void setResultSet(ResultSet rs) {
-		
+
 		try {
 			setFirstName(rs.getString("first_name"));
 			setLastName(rs.getString("last_name"));
@@ -146,12 +156,11 @@ public class UserBean extends BaseBean {
 			setUserLock(rs.getString("user_lock"));
 			setRegisteredIp(rs.getString("registered_ip"));
 			setLastLoginIp(rs.getString("last_login_ip"));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		super.setResultSet(rs);
 	}
 

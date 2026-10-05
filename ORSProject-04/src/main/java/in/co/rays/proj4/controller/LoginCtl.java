@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.model.UserModel;
+import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.ServletUtility;
 import jakarta.servlet.ServletException;
@@ -20,8 +21,10 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 
+		// Default true kr rkha hai //flag bhi kahete h
 		boolean pass = true;
 
+		//
 		if (DataValidator.isNull(request.getParameter("login"))) {
 			request.setAttribute("login", "login is required");
 			pass = false;
@@ -44,6 +47,7 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 
 		if (op != null) {
 			HttpSession session = request.getSession();
+			ServletUtility.setSuccessMessage("user logout successfully", request);
 			session.invalidate();
 		}
 
@@ -52,8 +56,44 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 	}
 
 	@Override
+	protected UserBean populateBean(HttpServletRequest request) {
+
+		UserBean bean = new UserBean();
+
+		bean.setLogin(DataUtility.getString(request.getParameter("login")));
+		bean.setPassword(DataUtility.getString(request.getParameter("password")));
+
+		return bean;
+
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		String op = DataUtility.getString(request.getParameter("operation"));
+
+		UserBean bean = populateBean(request);
+		UserModel model = new UserModel();
+		HttpSession session = request.getSession();
+
+		if (OP_SIGNIN.equalsIgnoreCase(op)) {
+
+			try {
+				bean = model.authenticate(bean.getLogin(), bean.getPassword());
+				if (bean != null) {
+					session.setAttribute("user", bean);
+					ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
+					return;
+				} else {
+					ServletUtility.setErrorMessage("Invalid User", request);
+
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		ServletUtility.forward(getView(), request, response);
 	}

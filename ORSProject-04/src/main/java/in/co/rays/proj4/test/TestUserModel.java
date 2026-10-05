@@ -34,7 +34,7 @@ public class TestUserModel {
 		bean.setLogin("vinay@gmail.com");
 		bean.setPassword("123456");
 		bean.setDob(sdf.parse("18-09-1997"));
-		bean.setLastLogin(sdf.parse("21-09-2026"));
+		//bean.setLastLogin(sdf.parse("21-09-2026"));
 		bean.setMobileNo("9876545678");
 		// 5 = KIOSK
 		bean.setRoleId(5);
@@ -61,7 +61,7 @@ public class TestUserModel {
 		bean.setLogin("nirmal@gmail.com");
 		bean.setPassword("123456");
 		bean.setDob(sdf.parse("13-07-2000"));
-		bean.setLastLogin(sdf.parse("21-09-2026"));
+		//bean.setLastLogin(sdf.parse("21-09-2026"));
 		bean.setMobileNo("9876543210");
 		// 1 = Admin
 		bean.setRoleId(1);
