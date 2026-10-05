@@ -96,10 +96,17 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 			throws ServletException, IOException {
 		System.out.println("service method");
 
-		if (request.getMethod() == "POST" && validate(request) == false) {
-			ServletUtility.forward(getView(), request, response);
-			return;
-		}
+		/*
+		 * if (request.getMethod() == "POST" && validate(request) == false) {
+		 * ServletUtility.forward(getView(), request, response); return;
+		 */
+		
+		//equalsIgnoreCase Case Sensitive hoti hai
+		
+			if ("POST".equalsIgnoreCase(request.getMethod()) && validate(request) == false) {
+				ServletUtility.forward(getView(), request, response);
+				return;
+			}
 
 		super.service(request, response);
 	}

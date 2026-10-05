@@ -9,7 +9,7 @@
 
 	<br>
 	<h1 align="center">
-		<font size="10px" color="red">Welcome to ORS<%=isLogin ? "(" + user.getFirstName() + ")" : ""%></font>
+		<font size="10px" color="Red">Welcome to ORS<%=isLogin ? "(" + user.getFirstName() + ")" : ""%></font>
 	</h1>
 
 </body>

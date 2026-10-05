@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<<html>
+<html>
 <head>
 
 <style type="text/css">

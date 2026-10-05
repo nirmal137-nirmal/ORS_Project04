@@ -10,6 +10,7 @@
 	<%@ include file="Header.jsp"%>
 
 	<div align="center">
+
 		<h1>Login</h1>
 
 		<form action="<%=ORSView.LOGIN_CTL%>" method="post">
@@ -17,16 +18,16 @@
 			<table>
 
 				<tr>
-					<th>Login</th>
+					<th align="left">Login</th>
 					<td><input type="text" name="login"
-						placeholder="enter your login" value=""></td>
+						placeholder="enter you login" value=""></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("login", request)%></td>
 				</tr>
 
 				<tr>
-					<td>Password</td>
+					<th align="left">Password</th>
 					<td><input type="password" name="password"
-						placeholder="enter your password" value=""></td>
+						placeholder="enter you password" value=""></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("password", request)%></td>
 				</tr>
 
@@ -38,10 +39,10 @@
 
 			</table>
 
-
 		</form>
 
 	</div>
 
+	<%@include file="Footer.jsp"%>
 </body>
 </html>
