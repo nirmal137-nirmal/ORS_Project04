@@ -2,7 +2,9 @@ package in.co.rays.proj4.controller;
 
 import java.io.IOException;
 
+import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.model.RoleModel;
 import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
@@ -74,25 +76,28 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 		String op = DataUtility.getString(request.getParameter("operation"));
 
 		UserBean bean = populateBean(request);
-		UserModel model = new UserModel();
+		UserModel model = getModel();
+		RoleModel rmodel = new RoleModel();
+		
 		HttpSession session = request.getSession();
 
 		if (OP_SIGNIN.equalsIgnoreCase(op)) {
+			
+			bean = model.authenticate(bean.getLogin(), bean.getPassword());
 
-			try {
-				bean = model.authenticate(bean.getLogin(), bean.getPassword());
 				if (bean != null) {
+					
 					session.setAttribute("user", bean);
+					RoleBean rbean = rmodel.findByPk(bean.getRoleId());
+					session.setAttribute("role", rbean.getName());
+					
 					ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
 					return;
+					
 				} else {
-					ServletUtility.setErrorMessage("Invalid User", request);
+					ServletUtility.setErrorMessage("Invalid login or password", request);
 
 				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 
 		ServletUtility.forward(getView(), request, response);

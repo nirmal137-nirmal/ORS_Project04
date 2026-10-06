@@ -68,6 +68,7 @@ public class UserRegistrationCtl extends BaseCtl<UserBean, UserModel> {
 
 		UserBean bean = new UserBean();
 
+		// View se get kiya or bean me set kiya 
 		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
 		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
 		bean.setLogin(DataUtility.getString(request.getParameter("login")));
@@ -86,9 +87,12 @@ public class UserRegistrationCtl extends BaseCtl<UserBean, UserModel> {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// operation get kiya 
 		String op = DataUtility.getString(request.getParameter("operation"));
 
+		
 		UserBean bean = populateBean(request);
+		//model ka object liya 
 		UserModel model = getModel();
 
 		if (OP_SIGN_UP.equalsIgnoreCase(op)) {

@@ -17,8 +17,10 @@
 	<div align="center">
 
 		<h1>Login</h1>
+		
 		<h3 style="color: green"><%=succ%></h3>
 		<h3 style="color: red"><%=error%></h3>
+		
 		<form action="<%=ORSView.LOGIN_CTL%>" method="post">
 
 			<table>

@@ -109,7 +109,7 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setInt(8, bean.getUnsuccessfullLogin());
 			pstmt.setString(9, bean.getGender());
 			//pstmt.setDate(10, new java.sql.Date(bean.getLastLogin().getTime()));
-			pstmt.setTimestamp(10, bean.getLastLogin());
+			pstmt.setTimestamp(10, bean.getLastLogin());	
 			pstmt.setString(11, bean.getUserLock());
 			pstmt.setString(12, bean.getRegisteredIp());
 			pstmt.setString(13, bean.getLastLoginIp());
