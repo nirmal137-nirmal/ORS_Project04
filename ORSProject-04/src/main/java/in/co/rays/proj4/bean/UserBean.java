@@ -164,4 +164,6 @@ public class UserBean extends BaseBean {
 		super.setResultSet(rs);
 	}
 
+	
+
 }

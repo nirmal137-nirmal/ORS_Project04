@@ -21,12 +21,12 @@ public class UserModel extends BaseModel<UserBean> {
 		if (existBean != null) {
 			throw new DuplicateRecordException("login already exist");
 		}
-		
+
 		/*
 		 * RoleModel rmodel = new RoleModel(); RoleBean rbean =
 		 * rmodel.findByPk(bean.getId());
 		 */
-		
+
 		try {
 
 			pk = nextPk();
@@ -47,7 +47,7 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setLong(8, bean.getRoleId());
 			pstmt.setInt(9, bean.getUnsuccessfullLogin());
 			pstmt.setString(10, bean.getGender());
-			//pstmt.setDate(11, new java.sql.Date(bean.getLastLogin().getTime()));
+			// pstmt.setDate(11, new java.sql.Date(bean.getLastLogin().getTime()));
 			pstmt.setTimestamp(11, bean.getLastLogin());
 			pstmt.setString(12, bean.getUserLock());
 			pstmt.setString(13, bean.getRegisteredIp());
@@ -64,12 +64,10 @@ public class UserModel extends BaseModel<UserBean> {
 			System.out.println("User Record Inserted Successfully");
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			JDBCDataSource.trnRollBack(conn);
 
 		} finally {
-
 			JDBCDataSource.closeConnection(conn);
 		}
 
@@ -80,7 +78,7 @@ public class UserModel extends BaseModel<UserBean> {
 	public void update(UserBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
-		
+
 		UserBean existBean = findByLogin(bean.getLogin());
 
 		if (existBean != null && existBean.getId() != bean.getId()) {
@@ -108,8 +106,8 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setLong(7, bean.getRoleId());
 			pstmt.setInt(8, bean.getUnsuccessfullLogin());
 			pstmt.setString(9, bean.getGender());
-			//pstmt.setDate(10, new java.sql.Date(bean.getLastLogin().getTime()));
-			pstmt.setTimestamp(10, bean.getLastLogin());	
+			// pstmt.setDate(10, new java.sql.Date(bean.getLastLogin().getTime()));
+			pstmt.setTimestamp(10, bean.getLastLogin());
 			pstmt.setString(11, bean.getUserLock());
 			pstmt.setString(12, bean.getRegisteredIp());
 			pstmt.setString(13, bean.getLastLoginIp());

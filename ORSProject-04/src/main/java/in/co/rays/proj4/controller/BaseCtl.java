@@ -89,6 +89,15 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		B bean = populateBean(request);
+		M model = getModel();
+
+		model.add(bean);
+
+		ServletUtility.setSuccessMessage("record is successfully saved", request);
+
+		ServletUtility.forward(getView(), request, response);
+
 	}
 
 	@Override
@@ -100,13 +109,13 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 		 * if (request.getMethod() == "POST" && validate(request) == false) {
 		 * ServletUtility.forward(getView(), request, response); return;
 		 */
-		
-		//equalsIgnoreCase Case Sensitive hoti hai
-		
-			if ("POST".equalsIgnoreCase(request.getMethod()) && validate(request) == false) {
-				ServletUtility.forward(getView(), request, response);
-				return;
-			}
+
+		// equalsIgnoreCase Case Sensitive hoti hai
+
+		if ("POST".equalsIgnoreCase(request.getMethod()) && validate(request) == false) {
+			ServletUtility.forward(getView(), request, response);
+			return;
+		}
 
 		super.service(request, response);
 	}
