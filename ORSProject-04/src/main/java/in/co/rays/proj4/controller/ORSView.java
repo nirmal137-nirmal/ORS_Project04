@@ -43,7 +43,7 @@ public interface ORSView {
 	public String USER_CTL = APP_CONTEXT + "/UserCtl";
 	public String USER_LIST_CTL = APP_CONTEXT + "/UserListCtl";
 	public String COLLEGE_CTL = APP_CONTEXT + "/CollegeCtl";
-	public String COLLEGE_LIST_CTL = APP_CONTEXT + "/ctl/CollegeListCtl";
+	public String COLLEGE_LIST_CTL = APP_CONTEXT + "/ctl/CollegeListCtl"; 
 	public String STUDENT_CTL = APP_CONTEXT + "/StudentCtl";
 	public String STUDENT_LIST_CTL = APP_CONTEXT + "/StudentListCtl";
 	public String ROLE_CTL = APP_CONTEXT + "/RoleCtl";

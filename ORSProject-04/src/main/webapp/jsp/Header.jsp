@@ -27,6 +27,10 @@
 	<a href="<%=ORSView.ROLE_LIST_CTL%>">Role List</a> |
 	<a href="<%=ORSView.USER_CTL%>">Add User</a> |
 	<a href="<%=ORSView.USER_LIST_CTL%>">User List</a> |
+	<a href="<%=ORSView.COLLEGE_CTL%>">Add College</a> |
+	<a href="<%=ORSView.COLLEGE_LIST_CTL%>">College List</a> |
+	<a href="<%=ORSView.FACULTY_CTL%>">Add Faculty</a> |
+	<a href="<%=ORSView.FACULTY_LIST_CTL%>">Faculty List</a> |
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=logout"%>">Logout</a> |
 
 	<%
