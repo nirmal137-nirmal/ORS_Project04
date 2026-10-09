@@ -12,20 +12,20 @@ import in.co.rays.proj4.exception.DatabaseException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
-public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic Type hai. BaseModel kisi bhi aise Bean ke saath kaam karega jo BaseBean ko extend karta hai.
+public abstract class BaseModel<T extends BaseBean> { // T ka meaning Generic Type hai. BaseModel kisi bhi aise Bean ke
+														// saath kaam karega jo BaseBean ko extend karta hai.
 
 	public abstract long add(T bean) throws ApplicationException, DuplicateRecordException;
 
 	public abstract void update(T bean) throws ApplicationException, DuplicateRecordException;
- 
+
 	public abstract String getWhereClause(T bean);
 
 	public abstract String getTable();
 
 	public abstract T getBean();
-	
-	
-     //Find By PK
+
+	// Find By PK
 	public Integer nextPk() throws DatabaseException {
 
 		Connection conn = null;
@@ -52,7 +52,7 @@ public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic T
 
 	}
 
-	// Delete Method 
+	// Delete Method
 	public void delete(int id) {
 		Connection conn = null;
 
@@ -134,28 +134,29 @@ public abstract class BaseModel<T extends BaseBean> {  // T ka meaning Generic T
 		return list;
 
 	}
-	
+
 	// find By UniqueColumn // Bussiness Validation
 	public T findByUniqueColumn(String column, String Value) {
 		Connection conn = null;
 		T bean = null;
-		
+
 		try {
 			conn = JDBCDataSource.getConnection();
-			
-			PreparedStatement pstmt = conn.prepareStatement("select * from " + getTable() + " where " + column + " = ?");
-			
+
+			PreparedStatement pstmt = conn
+					.prepareStatement("select * from " + getTable() + " where " + column + " = ?");
+
 			pstmt.setString(1, Value);
-			
+
 			ResultSet rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				bean = getBean();
 				bean.setResultSet(rs);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCDataSource.closeConnection(conn);
 		}
 		return bean;

@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="in.co.rays.proj4.bean.RoleBean"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
@@ -12,7 +13,13 @@
 </head>
 <body>
 	<%
+	String succ = ServletUtility.getSuccessMessage(request);
+	String error = ServletUtility.getErrorMessage(request);
+
 	List<RoleBean> list = ServletUtility.getList(request);
+	
+	List<RoleBean> nextList = (List<RoleBean>) request.getAttribute("nextList");
+	
 	int pageNo = ServletUtility.getPageNo(request);
 	int pageSize = ServletUtility.getPageSize(request);
 	int index = (pageNo - 1) * pageSize + 1;
@@ -23,12 +30,17 @@
 	<div align="center">
 
 		<h1>Role List</h1>
+		<h3 style="color: green"><%=succ%></h3>
+		<h3 style="color: red"><%=error%></h3>
 
 		<form action="<%=ORSView.ROLE_LIST_CTL%>" method="post">
 
 			<table border="1px" width="100%">
 
 				<tr style="background-color: #6FA7A0;">
+					<th><input type="checkbox"
+						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
+						All</th>
 					<th>S No.</th>
 					<th>Name</th>
 					<th>Description</th>
@@ -39,6 +51,8 @@
 					RoleBean bean = it.next();
 				%>
 				<tr align="center">
+					<td><input type="checkbox" name="ids"
+						value="<%=bean.getId()%>"></td>
 					<td style="background-color: #D9E2DF;"><%=index++%></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getName()%></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getDescription()%></td>
@@ -46,6 +60,22 @@
 				<%
 				}
 				%>
+			</table>
+
+			<%-- <%@ include file="ListFooter.jsp"%> --%>
+
+			<table width="100%">
+				<input type="hidden" name="pageNo" value="<%=pageNo%>">
+				<tr>
+					<td><input type="submit" name="operation"
+						<%=pageNo == 1 ? "disabled" : ""%>
+						value="<%=BaseCtl.OP_PREVIOUS%>"></td>
+					<td align="center"><input type="submit" name="operation"
+						value="<%=BaseCtl.OP_DELETE%>"></td>
+					<td align="right"><input type="submit" name="operation"
+						<%=nextList.size() == 0 ? "disabled" : ""%>
+						value="<%=BaseCtl.OP_NEXT%>"></td>
+				</tr>
 			</table>
 
 		</form>

@@ -14,8 +14,8 @@ public class TestCourseModel {
 
 	public static void main(String[] args) {
 
-		//testAdd();
-		 testUpdate();
+		testAdd();
+		 //testUpdate();
 		// testDelete();
 		//testFindByPk();
 		//testSearch();

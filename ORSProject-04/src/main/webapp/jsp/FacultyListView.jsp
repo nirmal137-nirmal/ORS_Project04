@@ -1,44 +1,41 @@
+<!DOCTYPE html>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
-<%@page import="in.co.rays.proj4.bean.UserBean"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
-<%@page import="in.co.rays.proj4.controller.ORSView"%>
-
-<!DOCTYPE html>
+<%@page import="in.co.rays.proj4.bean.FacultyBean"%>
+<%@page import="java.util.List"%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User List</title>
+<title>Insert title here</title>
 </head>
-
 <body>
 
 	<%
 	String succ = ServletUtility.getSuccessMessage(request);
 	String error = ServletUtility.getErrorMessage(request);
 
-	List<UserBean> list = ServletUtility.getList(request);
+	List<FacultyBean> list = ServletUtility.getList(request);
 
-	List<UserBean> nextList = (List<UserBean>) request.getAttribute("nextList");
+	List<FacultyBean> nextList = (List<FacultyBean>) request.getAttribute("nextList");
 
 	int pageNo = ServletUtility.getPageNo(request);
 	int pageSize = ServletUtility.getPageSize(request);
 
 	int index = (pageNo - 1) * pageSize + 1;
 
-	Iterator<UserBean> it = list.iterator();
+	Iterator<FacultyBean> it = list.iterator();
 	%>
 
 	<%@ include file="Header.jsp"%>
 
 	<div align="center">
 
-		<h1>User List</h1>
+		<h1>Faculty List</h1>
 		<h3 style="color: green"><%=succ%></h3>
 		<h3 style="color: red"><%=error%></h3>
 
-		<form action="<%=ORSView.USER_LIST_CTL%>" method="post">
+		<form action="<%=ORSView.FACULTY_LIST_CTL%>" method="post">
 
 			<table border="1" width="100%">
 
@@ -47,20 +44,21 @@
 					<th><input type="checkbox"
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
 						All</th>
-
 					<th>S No.</th>
+					<th>College Name</th>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th>Login</th>
-					<th>DOB</th>
-					<th>Role ID</th>
+					<th>Email</th>
+					<th>Mobile Number</th>
+					<th>Address</th>
+					<th>College ID</th>
 					<th>Gender</th>
+					<th>DOB</th>
 				</tr>
 
 				<%
 				while (it.hasNext()) {
-
-					UserBean bean = it.next();
+					FacultyBean bean = it.next();
 				%>
 
 				<tr align="center">
@@ -70,12 +68,15 @@
 
 					<td style="background-color: #D9E2DF;"><%=index++%></td>
 
+					<td style="background-color: #D9E2DF;"><%=bean.getCollegeName()%></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getFirstName()%></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getLastName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getLogin()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getDob()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getRoleId()%></td>
+					<td style="background-color: #D9E2DF;"><%=bean.getEmail()%></td>
+					<td style="background-color: #D9E2DF;"><%=bean.getMobileNo()%></td>
+					<td style="background-color: #D9E2DF;"><%=bean.getAddress()%></td>
+					<td style="background-color: #D9E2DF;"><%=bean.getCollegeId()%></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getGender()%></td>
+					<td style="background-color: #D9E2DF;"><%=bean.getDateOfBirth()%></td>
 
 				</tr>
 
@@ -84,7 +85,7 @@
 				%>
 
 			</table>
-
+			
 			<table width="100%">
 				<input type="hidden" name="pageNo" value="<%=pageNo%>">
 				<tr>
@@ -98,7 +99,6 @@
 						value="<%=BaseCtl.OP_NEXT%>"></td>
 				</tr>
 			</table>
-
 
 		</form>
 

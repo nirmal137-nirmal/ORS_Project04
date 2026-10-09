@@ -21,7 +21,7 @@
 	if (isLogin) {
 	%>
 
-	<h2><%=welcomeMsg + user.getFirstName() + "(" + role +")"%></h2>
+	<h2><%=welcomeMsg + user.getFirstName() + "(" + role + ")"%></h2>
 
 	<a href="<%=ORSView.ROLE_CTL%>">Add Role</a> |
 	<a href="<%=ORSView.ROLE_LIST_CTL%>">Role List</a> |
@@ -31,6 +31,12 @@
 	<a href="<%=ORSView.COLLEGE_LIST_CTL%>">College List</a> |
 	<a href="<%=ORSView.FACULTY_CTL%>">Add Faculty</a> |
 	<a href="<%=ORSView.FACULTY_LIST_CTL%>">Faculty List</a> |
+	<a href="<%=ORSView.STUDENT_CTL%>">Add Student</a> |
+	<a href="<%=ORSView.STUDENT_LIST_CTL%>">Student List</a> |
+	<a href="<%=ORSView.COURSE_CTL%>">Add Course</a> |
+	<a href="<%=ORSView.COURSE_LIST_CTL%>">Course List</a> |
+
+
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=logout"%>">Logout</a> |
 
 	<%

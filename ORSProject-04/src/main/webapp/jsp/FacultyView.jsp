@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,19 +13,24 @@
 	String error = ServletUtility.getErrorMessage(request);
 	%>
 
+
 	<%@ include file="Header.jsp"%>
 
-	<form action="<%=ORSView.USER_CTL%>" method="post">
-
+	<form action="<%=ORSView.FACULTY_CTL%>" method="post">
 		<div align="center">
 
-			<h1>Add User</h1>
-			
+			<h1>Add Faculty</h1>
 
 			<h3 style="color: green"><%=succ%></h3>
 			<h3 style="color: red"><%=error%></h3>
 
 			<table>
+				<%-- <tr>
+					<th align="left">CollegeName<font color="red">*</font></th>
+					<td><input type="text" name="collegeName" value=""
+						placeholder="enter your collegeName"></td>
+					<td style="color: red"><%=ServletUtility.getErrorMessage("collegeName", request)%></td>
+				</tr> --%>
 
 				<tr>
 					<th align="left">FirstName<font color="red">*</font></th>
@@ -42,37 +47,34 @@
 				</tr>
 
 				<tr>
-					<th align="left">Login<font color="red">*</font></th>
-					<td><input type="text" name="login" value=""
-						placeholder="enter an emial"></td>
-					<td style="color: red"><%=ServletUtility.getErrorMessage("login", request)%></td>
+					<th align="left">Email<font color="red">*</font></th>
+					<td><input type="email" name="email" value=""
+						placeholder="enter your email"></td>
+					<td style="color: red"><%=ServletUtility.getErrorMessage("email", request)%></td>
 				</tr>
-
 				<tr>
-					<th align="left">Password<font color="red">*</font></th>
-					<td><input type="password" name="password" value=""
-						placeholder="enter an password"></td>
-					<td style="color: red"><%=ServletUtility.getErrorMessage("password", request)%></td>
+					<th align="left">Mobile No.<font color="red">*</font></th>
+					<td><input type="text" name="mobileNo" value=""
+						placeholder="enter your mobileNo"></td>
+					<td style="color: red"><%=ServletUtility.getErrorMessage("mobileNo", request)%></td>
 				</tr>
-
 				<tr>
-					<th align="left">ConfirmPassword<font color="red">*</font></th>
-					<td><input type="password" name="confirmPassword" value=""
-						placeholder="re-enter your password"></td>
-					<td style="color: red"><%=ServletUtility.getErrorMessage("confirmPassword", request)%></td>
+					<th align="left">Address<font color="red">*</font></th>
+					<td><input type="text" name="address" value=""
+						placeholder="enter your address"></td>
+					<td style="color: red"><%=ServletUtility.getErrorMessage("address", request)%></td>
 				</tr>
-
 				<tr>
-					<th align="left">Role<font color="red">*</font></th>
-					<td><select name='roleId'>
+					<th align="left">College<font color="red">*</font></th>
+					<td><select name='collegeId'>
 							<option selected value=''>------------Select-------------</option>
-							<option value='1'>Admin</option>
-							<option value='2'>Student</option>
-							<option value='3'>Faculty</option>
-							<option value='4'>College</option>
-							<option value='5'>KIOSK</option>
+							<option value='1'>Shri Vaishnav College</option>
+							<option value='2'>Holkar College</option>
+							<option value='3'>GSITS College</option>
+							<option value='4'>Mdicaps College</option>
+							<option value='5'>Acropolis College</option>
 					</select></td>
-					<td style="color: red"><%=ServletUtility.getErrorMessage("roleId", request)%></td>
+					<td style="color: red"><%=ServletUtility.getErrorMessage("collegeId", request)%></td>
 				</tr>
 
 
