@@ -42,8 +42,10 @@
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
 						All</th>
 					<th>S No.</th>
+					<th>Id</th>
 					<th>Name</th>
 					<th>Description</th>
+					<th>Edit</th>
 				</tr>
 
 				<%
@@ -51,11 +53,13 @@
 					RoleBean bean = it.next();
 				%>
 				<tr align="center">
-					<td><input type="checkbox" name="ids"
+					<td style="background-color: #D9E2DF;"><input type="checkbox" name="ids"
 						value="<%=bean.getId()%>"></td>
 					<td style="background-color: #D9E2DF;"><%=index++%></td>
+					<td style="background-color: #D9E2DF;"><%=bean.getId() %></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getName()%></td>
 					<td style="background-color: #D9E2DF;"><%=bean.getDescription()%></td>
+					<td><a href="<%=ORSView.ROLE_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 				</tr>
 				<%
 				}

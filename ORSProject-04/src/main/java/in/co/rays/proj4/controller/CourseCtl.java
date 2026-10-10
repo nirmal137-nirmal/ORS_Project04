@@ -35,9 +35,10 @@ public class CourseCtl extends BaseCtl<CourseBean, CourseModel> {
 	protected CourseBean populateBean(HttpServletRequest request) {
 
 		CourseBean bean = new CourseBean();
-
+		
 		bean.setName(DataUtility.getString(request.getParameter("courseName")));
 		bean.setDescription(DataUtility.getString(request.getParameter("description")));
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setDuration(DataUtility.getString(request.getParameter("duration")));
 
 		populateDTO(bean, request);

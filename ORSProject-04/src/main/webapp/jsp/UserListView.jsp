@@ -1,8 +1,8 @@
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="in.co.rays.proj4.bean.UserBean"%>
-<%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 
 <!DOCTYPE html>
@@ -46,8 +46,7 @@
 
 					<th><input type="checkbox"
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
-						All</th>
-
+						All</th> x
 					<th>S No.</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -63,19 +62,19 @@
 					UserBean bean = it.next();
 				%>
 
-				<tr align="center">
+				<tr align="center" style="background-color: rgb(255, 128, 128);">
 
-					<td style="background-color: #D9E2DF;"><input type="checkbox"
-						name="ids" value="<%=bean.getId()%>"></td>
+					<td><input type="checkbox" name="ids"
+						value="<%=bean.getId()%>"></td>
 
-					<td style="background-color: #D9E2DF;"><%=index++%></td>
+					<td><%=index++%></td>
 
-					<td style="background-color: #D9E2DF;"><%=bean.getFirstName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getLastName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getLogin()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getDob()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getRoleId()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getGender()%></td>
+					<td><%=bean.getFirstName()%></td>
+					<td><%=bean.getLastName()%></td>
+					<td><%=bean.getLogin()%></td>
+					<td><%=bean.getDob()%></td>
+					<td><%=bean.getRoleId()%></td>
+					<td><%=bean.getGender()%></td>
 
 				</tr>
 
@@ -103,7 +102,13 @@
 		</form>
 
 	</div>
+	<div align="center">
 
+		<!-- View pe page No or Page Size Dikhane ke liye  -->
+		<%-- <h2><%="pageNo = " + pageNo + "|" + "pageSize = " + list.size()%></h2> --%>
+
+
+	</div>
 	<%@ include file="Footer.jsp"%>
 
 </body>

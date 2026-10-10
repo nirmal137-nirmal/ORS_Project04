@@ -9,6 +9,7 @@ List<RoleBean> nextList = (List<RoleBean>) request.getAttribute("nextList");
 
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <table width="100%">
+	<input type="hidden" name="pageNo" value="<%=pageNo1%>">
 	<tr>
 		<td><input type="submit" name="operation"
 			<%=pageNo1 == 1 ? "disabled" : ""%> value="<%=BaseCtl.OP_PREVIOUS%>"></td>
@@ -19,3 +20,4 @@ List<RoleBean> nextList = (List<RoleBean>) request.getAttribute("nextList");
 			value="<%=BaseCtl.OP_NEXT%>"></td>
 	</tr>
 </table>
+

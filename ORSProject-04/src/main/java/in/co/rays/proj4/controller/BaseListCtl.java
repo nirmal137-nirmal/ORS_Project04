@@ -16,15 +16,15 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		M model = getModel();
 		B bean = populateBean(request);
 		int pageNo = 1;
 		int pageSize = 5;
 
-		List<B> list = model.search(bean, pageNo, pageSize);	
-		
-		//for next page 
+		List<B> list = model.search(bean, pageNo, pageSize);
+
+		// for next page
 		List<B> nextList = model.search(bean, pageNo + 1, pageSize);
 		request.setAttribute("nextList", nextList);
 
@@ -39,27 +39,30 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String op = DataUtility.getString(request.getParameter("operation"));
-		
+
 		M model = getModel();
 		B bean = populateBean(request);
 		int pageNo = 1;
 		int pageSize = 5;
-		
-		if(OP_DELETE.equalsIgnoreCase(op)) {
+
+		if (OP_DELETE.equalsIgnoreCase(op)) {
+			
+			pageNo = DataUtility.getInt(request.getParameter("pageNo"));
+
 			String[] ids = request.getParameterValues("ids");
 			if (ids != null && ids.length > 0) {
 				for (String id : ids) {
 					model.delete(DataUtility.getInt(id));
 					ServletUtility.setSuccessMessage("record deleted successfully", request);
 				}
-			}else {
+			} else {
 				ServletUtility.setErrorMessage("select at least one record to delete", request);
 			}
 		}
-		
-		if (OP_NEXT.equalsIgnoreCase(op)){
+
+		if (OP_NEXT.equalsIgnoreCase(op)) {
 			pageNo = DataUtility.getInt(request.getParameter("pageNo"));
 			pageNo++;
 		}
@@ -68,15 +71,15 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 			pageNo = DataUtility.getInt(request.getParameter("pageNo"));
 			pageNo--;
 		}
-		
+
 		List<B> list = model.search(bean, pageNo, pageSize);
 		List<B> nextList = model.search(bean, pageNo + 1, pageSize);
-		
+
 		request.setAttribute("nextList", nextList);
 		ServletUtility.setList(list, request);
 		ServletUtility.setPageNo(pageNo, request);
 		ServletUtility.setPageSize(pageSize, request);
-		
+
 		ServletUtility.forward(getView(), request, response);
 	}
 
