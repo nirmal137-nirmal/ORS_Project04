@@ -46,14 +46,16 @@
 
 					<th><input type="checkbox"
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
-						All</th> x
+						All</th>
 					<th>S No.</th>
+					<th>Id</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Login</th>
 					<th>DOB</th>
 					<th>Role ID</th>
 					<th>Gender</th>
+					<th>Edit</th>
 				</tr>
 
 				<%
@@ -68,13 +70,15 @@
 						value="<%=bean.getId()%>"></td>
 
 					<td><%=index++%></td>
-
+					<td><%=bean.getId()%></td>
 					<td><%=bean.getFirstName()%></td>
 					<td><%=bean.getLastName()%></td>
 					<td><%=bean.getLogin()%></td>
 					<td><%=bean.getDob()%></td>
 					<td><%=bean.getRoleId()%></td>
 					<td><%=bean.getGender()%></td>
+
+					<td><a href="<%=ORSView.USER_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 
 				</tr>
 
@@ -102,13 +106,12 @@
 		</form>
 
 	</div>
-	<div align="center">
-
+	<%-- <div align="center">
 		<!-- View pe page No or Page Size Dikhane ke liye  -->
-		<%-- <h2><%="pageNo = " + pageNo + "|" + "pageSize = " + list.size()%></h2> --%>
+		<h2><%="pageNo = " + pageNo + "|" + "pageSize = " + list.size()%></h2>
 
-
-	</div>
+	</div> --%>
+	
 	<%@ include file="Footer.jsp"%>
 
 </body>
