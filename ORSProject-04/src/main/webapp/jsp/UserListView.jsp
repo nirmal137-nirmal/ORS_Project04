@@ -64,7 +64,7 @@
 					UserBean bean = it.next();
 				%>
 
-				<tr align="center" style="background-color: rgb(255, 128, 128);">
+				<tr align="center" style="background-color: rgb(192, 192, 192);">
 
 					<td><input type="checkbox" name="ids"
 						value="<%=bean.getId()%>"></td>

@@ -15,8 +15,8 @@ public class TestFacultyModel {
 
 	public static void main(String[] args) throws Exception {
 
-		testAdd();
-		// testUpdate();
+		//testAdd();
+		testUpdate();
 		// testDelete();
 		//testFindByPk();
 		//testSearch();
@@ -51,7 +51,7 @@ public class TestFacultyModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		FacultyBean bean = new FacultyBean();
 
-		bean.setId(6);
+		bean.setId(1);
 		bean.setCollegeId(1);
 		//bean.setCollegeName(2);
 		bean.setFirstName("Mridul");

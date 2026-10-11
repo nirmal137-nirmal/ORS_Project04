@@ -56,16 +56,15 @@
 					CourseBean bean = it.next();
 				%>
 
-				<tr align="center">
-					<td style="background-color: #D9E2DF;"><input type="checkbox"
-						name="ids" value="<%=bean.getId()%>"></td>
-					<td style="background-color: #D9E2DF;"><%=index++%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getId()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getDescription()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getDuration()%></td>
-					<td style="background-color: #D9E2DF;"><a
-						href="<%=ORSView.COURSE_CTL + "?id=" + bean.getId()%>">Edit</a></td>
+				<tr align="center" style="background-color: #D9E2DF;">
+					<td><input type="checkbox" name="ids"
+						value="<%=bean.getId()%>"></td>
+					<td><%=index++%></td>
+					<td><%=bean.getId()%></td>
+					<td><%=bean.getName()%></td>
+					<td><%=bean.getDescription()%></td>
+					<td><%=bean.getDuration()%></td>
+					<td><a href="<%=ORSView.COURSE_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 				</tr>
 
 				<%
@@ -75,8 +74,6 @@
 				<!-- for Next previous delete Operation -->
 
 				<%@ include file="ListFooter.jsp"%>
-
-
 
 			</table>
 

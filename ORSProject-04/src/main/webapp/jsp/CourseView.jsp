@@ -25,6 +25,7 @@
 	%>
 
 	<%@ include file="Header.jsp"%>
+
 	<div align="center">
 
 		<h1><%=bean != null && bean.getId() > 0 ? "Update Course" : "Add Course"%></h1>
@@ -43,21 +44,24 @@
 
 				<tr>
 					<th align="left">Course Name<font color="red">*</font></th>
-					<td><input type="text" name="courseName" value="<%=DataUtility.getStringData(bean.getName())%>"
+					<td><input type="text" name="courseName"
+						value="<%=DataUtility.getStringData(bean.getName())%>"
 						placeholder="enter your courseName"></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("courseName", request)%></td>
 				</tr>
 
 				<tr>
 					<th align="left">Course Description<font color="red">*</font></th>
-					<td><input type="text" name="description" value="<%=DataUtility.getStringData(bean.getDescription())%>"
+					<td><input type="text" name="description"
+						value="<%=DataUtility.getStringData(bean.getDescription())%>"
 						placeholder="enter course description"></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("description", request)%></td>
 				</tr>
 
 				<tr>
 					<th align="left">Course Duration<font color="red">*</font></th>
-					<td><input type="text" name="duration" value="<%=DataUtility.getStringData(bean.getDuration())%>"
+					<td><input type="text" name="duration"
+						value="<%=DataUtility.getStringData(bean.getDuration())%>"
 						placeholder="enter course duration"></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("duration", request)%></td>
 				</tr>

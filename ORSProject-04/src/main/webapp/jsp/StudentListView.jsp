@@ -46,7 +46,7 @@
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
 						All</th>
 					<th>S No.</th>
-					
+					<th>Id</th>
 					<th>College Name</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -54,6 +54,7 @@
 					<th>Mobile Number</th>
 					<th>College ID</th>
 					<th>DOB</th>
+					<th>Edit</th>
 				</tr>
 
 				<%
@@ -61,21 +62,21 @@
 					StudentBean bean = it.next();
 				%>
 
-				<tr align="center">
+				<tr align="center" style="background-color: #D9E2DF;">
 
-					<td style="background-color: #D9E2DF;"><input type="checkbox"
-						name="ids" value="<%=bean.getId()%>"></td>
+					<td><input type="checkbox" name="ids"
+						value="<%=bean.getId()%>"></td>
 
-					<td style="background-color: #D9E2DF;"><%=index++%></td>
-
-					<td style="background-color: #D9E2DF;"><%=bean.getCollegeName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getFirstName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getLastName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getEmail()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getMobileNo()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getCollegeId()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getDateOfBirth()%></td>
-
+					<td><%=index++%></td>
+					<td><%=bean.getId()%></td>
+					<td><%=bean.getCollegeName()%></td>
+					<td><%=bean.getFirstName()%></td>
+					<td><%=bean.getLastName()%></td>
+					<td><%=bean.getEmail()%></td>
+					<td><%=bean.getMobileNo()%></td>
+					<td><%=bean.getCollegeId()%></td>
+					<td><%=bean.getDateOfBirth()%></td>
+					<td><a href="<%=ORSView.STUDENT_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 				</tr>
 
 				<%
@@ -83,7 +84,7 @@
 				%>
 
 			</table>
-			
+
 			<table width="100%">
 				<input type="hidden" name="pageNo" value="<%=pageNo%>">
 				<tr>

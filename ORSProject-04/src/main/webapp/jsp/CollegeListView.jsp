@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.proj4.controller.CollegeCtl"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="in.co.rays.proj4.bean.CollegeBean"%>
 <%@page import="java.util.Iterator"%>
@@ -53,6 +54,8 @@
 					<th>State</th>
 					<th>City</th>
 					<th>Phone No.</th>
+					<th>Id</th>
+					<th>Edit</th>
 
 				</tr>
 
@@ -62,20 +65,19 @@
 					CollegeBean bean = it.next();
 				%>
 
-				<tr align="center">
+				<tr align="center" style="background-color: #D9E2DF;">
 
-					<td style="background-color: #D9E2DF;"><input type="checkbox"
-						name="ids" value="<%=bean.getId()%>"></td>
+					<td><input type="checkbox" name="ids"
+						value="<%=bean.getId()%>"></td>
 
-
-					<td style="background-color: #D9E2DF;"><%=index++%></td>
-
-					<td style="background-color: #D9E2DF;"><%=bean.getName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getAddress()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getState()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getCity()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getPhoneNo()%></td>
-
+					<td><%=index++%></td>
+					<td><%=bean.getName()%></td>
+					<td><%=bean.getAddress()%></td>
+					<td><%=bean.getState()%></td>
+					<td><%=bean.getCity()%></td>
+					<td><%=bean.getPhoneNo()%></td>
+					<th><%=bean.getId()%></th>
+					<td><a href="<%=ORSView.COLLEGE_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 
 				</tr>
 
@@ -95,7 +97,7 @@
 						value="<%=BaseCtl.OP_DELETE%>"></td>
 					<td align="right"><input type="submit" name="operation"
 						<%=nextList.size() == 0 ? "disabled" : ""%>
-						value="<%=BaseCtl.OP_NEXT%>"></td>
+						value="<%=CollegeCtl.OP_NEXT%>"></td>
 				</tr>
 			</table>
 

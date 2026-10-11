@@ -40,7 +40,7 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 			pstmt.setLong(1, pk);
 			pstmt.setLong(2, bean.getCollegeId());
 			// add cbean in this
-			//pstmt.setString(3, bean.getCollegeName());
+			// pstmt.setString(3, bean.getCollegeName());
 			pstmt.setString(3, fbean.getName());
 			pstmt.setString(4, bean.getFirstName());
 			pstmt.setString(5, bean.getLastName());
@@ -85,8 +85,8 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 		}
 
 		// Foreign key concept
-		CollegeModel cmodel = new CollegeModel();
-		CollegeBean cbean = cmodel.findByPk(bean.getCollegeId());
+		CollegeModel fmodel = new CollegeModel();
+		CollegeBean fbean = fmodel.findByPk(bean.getCollegeId());
 
 		try {
 
@@ -97,10 +97,10 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 					+ " set college_id=?, college_name=?, first_name=?, last_name=?, email=?, mobile_no=?, address=?, gender=?, date_of_birth=?, created_by=?, modified_by=?, created_datetime=?, modified_datetime=? where id=?");
 
 			pstmt.setLong(1, bean.getCollegeId());
-			pstmt.setString(2, bean.getCollegeName());
 			// add cbean
-			//pstmt.setString(3, bean.getCollegeName());
-			pstmt.setString(3, cbean.getName());
+			// pstmt.setString(2, bean.getCollegeName());
+			pstmt.setString(2, fbean.getName());
+			pstmt.setString(3, bean.getFirstName());
 			pstmt.setString(4, bean.getLastName());
 			pstmt.setString(5, bean.getEmail());
 			pstmt.setString(6, bean.getMobileNo());

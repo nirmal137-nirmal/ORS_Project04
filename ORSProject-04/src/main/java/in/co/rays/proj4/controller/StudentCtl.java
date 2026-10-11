@@ -50,7 +50,7 @@ public class StudentCtl extends BaseCtl<StudentBean, StudentModel> {
 	protected StudentBean populateBean(HttpServletRequest request) {
 
 		StudentBean bean = new StudentBean();
-
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
 		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
 		bean.setEmail(DataUtility.getString(request.getParameter("email")));
@@ -59,7 +59,7 @@ public class StudentCtl extends BaseCtl<StudentBean, StudentModel> {
 		bean.setDateOfBirth(DataUtility.getDate(request.getParameter("dob")));
 
 		populateDTO(bean, request);
-		
+
 		return bean;
 	}
 

@@ -63,8 +63,6 @@
 						value="<%=BaseCtl.OP_SAVE%>"></td>
 				</tr>
 
-
-
 			</table>
 		</form>
 	</div>

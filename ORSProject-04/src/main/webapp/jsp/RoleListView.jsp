@@ -52,13 +52,13 @@
 				while (it.hasNext()) {
 					RoleBean bean = it.next();
 				%>
-				<tr align="center">
-					<td style="background-color: #D9E2DF;"><input type="checkbox" name="ids"
+				<tr align="center" style="background-color: #D9E2DF;">
+					<td><input type="checkbox" name="ids"
 						value="<%=bean.getId()%>"></td>
-					<td style="background-color: #D9E2DF;"><%=index++%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getId() %></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getName()%></td>
-					<td style="background-color: #D9E2DF;"><%=bean.getDescription()%></td>
+					<td><%=index++%></td>
+					<td><%=bean.getId() %></td>
+					<td><%=bean.getName()%></td>
+					<td><%=bean.getDescription()%></td>
 					<td><a href="<%=ORSView.ROLE_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 				</tr>
 				<%

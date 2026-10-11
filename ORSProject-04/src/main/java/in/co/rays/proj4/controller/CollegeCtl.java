@@ -42,7 +42,7 @@ public class CollegeCtl extends BaseCtl<CollegeBean, CollegeModel> {
 	protected CollegeBean populateBean(HttpServletRequest request) {
 
 		CollegeBean bean = new CollegeBean();
-
+        bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setName(DataUtility.getString(request.getParameter("name")));
 		bean.setAddress(DataUtility.getString(request.getParameter("address")));
 		bean.setState(DataUtility.getString(request.getParameter("state")));

@@ -73,7 +73,8 @@ public class FacultyCtl extends BaseCtl<FacultyBean, FacultyModel> {
 
 		FacultyBean bean = new FacultyBean();
 
-		//bean.setCollegeName(DataUtility.getString(request.getParameter("collegeName")));
+		// bean.setCollegeName(DataUtility.getString(request.getParameter("collegeName")));
+		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
 		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
 		bean.setEmail(DataUtility.getString(request.getParameter("email")));
