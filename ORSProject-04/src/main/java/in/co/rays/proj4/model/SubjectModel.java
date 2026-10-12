@@ -20,8 +20,9 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 		SubjectBean existBean = findByName(bean.getName());
 
 		if (existBean != null) {
-			throw new DuplicateRecordException("Student name already exist");
+			throw new DuplicateRecordException("Subject name already exist");
 		}
+
 		// Foreign key concept
 		CourseModel cmodel = new CourseModel();
 		CourseBean cbean = cmodel.findByPk(bean.getCourseId());

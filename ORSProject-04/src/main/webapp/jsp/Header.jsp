@@ -35,6 +35,10 @@
 	<a href="<%=ORSView.STUDENT_LIST_CTL%>">Student List</a> |
 	<a href="<%=ORSView.COURSE_CTL%>">Add Course</a> |
 	<a href="<%=ORSView.COURSE_LIST_CTL%>">Course List</a> |
+	<a href="<%=ORSView.SUBJECT_CTL%>">Add Subject</a> |
+	<a href="<%=ORSView.SUBJECT_LIST_CTL%>">Subject List</a> |
+	<a href="<%=ORSView.MARKSHEET_CTL%>">Add MarkSheet</a> |
+	<a href="<%=ORSView.MARKSHEET_LIST_CTL%>">MarkSheet List</a> |
 
 
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=logout"%>">Logout</a> |

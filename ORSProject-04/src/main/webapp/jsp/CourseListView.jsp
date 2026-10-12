@@ -21,7 +21,9 @@
 
 	int pageNo = ServletUtility.getPageNo(request);
 	int pageSize = ServletUtility.getPageSize(request);
+	
 	int index = (pageNo - 1) * pageSize + 1;
+	
 	Iterator<CourseBean> it = list.iterator();
 	%>
 	<%@ include file="Header.jsp"%>
