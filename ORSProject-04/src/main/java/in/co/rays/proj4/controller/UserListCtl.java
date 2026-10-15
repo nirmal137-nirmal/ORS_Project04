@@ -20,7 +20,6 @@ public class UserListCtl extends BaseListCtl<UserBean, UserModel> {
 		bean.setDob(DataUtility.getDate(request.getParameter("dob")));
 		bean.setRoleId(DataUtility.getLong(request.getParameter("roleId")));
 		bean.setGender(DataUtility.getString(request.getParameter("gender")));
-
 		return bean;
 	}
 

@@ -130,6 +130,7 @@ public class UserModel extends BaseModel<UserBean> {
 
 		} finally {
 
+			
 			JDBCDataSource.closeConnection(conn);
 		}
 	}

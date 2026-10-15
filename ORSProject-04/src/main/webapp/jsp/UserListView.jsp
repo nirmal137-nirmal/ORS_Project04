@@ -1,3 +1,5 @@
+
+<%@page import="in.co.rays.proj4.controller.UserListCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="java.util.Iterator"%>
@@ -18,10 +20,9 @@
 	String succ = ServletUtility.getSuccessMessage(request);
 	String error = ServletUtility.getErrorMessage(request);
 
-	List<UserBean> list = ServletUtility.getList(request);
-
 	List<UserBean> nextList = (List<UserBean>) request.getAttribute("nextList");
 
+	List<UserBean> list = ServletUtility.getList(request);
 	int pageNo = ServletUtility.getPageNo(request);
 	int pageSize = ServletUtility.getPageSize(request);
 
@@ -98,7 +99,7 @@
 						value="<%=BaseCtl.OP_DELETE%>"></td>
 					<td align="right"><input type="submit" name="operation"
 						<%=nextList.size() == 0 ? "disabled" : ""%>
-						value="<%=BaseCtl.OP_NEXT%>"></td>
+						value="<%=UserListCtl.OP_NEXT%>"></td>
 				</tr>
 			</table>
 
@@ -111,7 +112,7 @@
 		<h2><%="pageNo = " + pageNo + "|" + "pageSize = " + list.size()%></h2>
 
 	</div> --%>
-	
+
 	<%@ include file="Footer.jsp"%>
 
 </body>
