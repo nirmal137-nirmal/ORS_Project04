@@ -8,6 +8,7 @@ import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.model.BaseModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
+import in.co.rays.proj4.util.MessageSource;
 import in.co.rays.proj4.util.ServletUtility;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -129,6 +130,9 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 
 		// equalsIgnoreCase Case Sensitive hoti hai
 
+		// Email
+		getMessageSource(request);
+
 		if ("POST".equalsIgnoreCase(request.getMethod()) && validate(request) == false) {
 			ServletUtility.forward(getView(), request, response);
 			return;
@@ -140,5 +144,11 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 	public abstract M getModel();
 
 	public abstract String getView();
+
+     //Email
+	public MessageSource getMessageSource(HttpServletRequest request) {
+		MessageSource messagesource = MessageSource.getInstance();
+		return messagesource;
+	}
 
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="in.co.rays.proj4.controller.CourseCtl"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="in.co.rays.proj4.bean.CourseBean"%>
 <%@page import="java.util.List"%>
@@ -7,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Course List</title>
 </head>
 <body>
 
@@ -21,9 +22,9 @@
 
 	int pageNo = ServletUtility.getPageNo(request);
 	int pageSize = ServletUtility.getPageSize(request);
-	
+
 	int index = (pageNo - 1) * pageSize + 1;
-	
+
 	Iterator<CourseBean> it = list.iterator();
 	%>
 	<%@ include file="Header.jsp"%>
@@ -35,6 +36,16 @@
 		<h3 style="color: red"><%=error%></h3>
 
 		<form action="<%=ORSView.COURSE_LIST_CTL%>" method="post">
+
+			<table>
+				<tr>
+					<td><input type="text" name="courseName" value=""
+						placeholder="search by courseName"></td>
+					<td><input type="submit" name="operation"
+						value="<%=CourseCtl.OP_SEARCH%>"></td>
+				</tr>
+			</table>
+
 
 			<table border="1px" width="100%">
 

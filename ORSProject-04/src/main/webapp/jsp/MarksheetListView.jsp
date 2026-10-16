@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.proj4.controller.MarksheetCtl"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="in.co.rays.proj4.bean.MarksheetBean"%>
 <%@page import="java.util.List"%>
@@ -8,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MarkSheet List</title>
 </head>
 <body>
 
@@ -37,6 +38,15 @@
 
 
 		<form action="<%=ORSView.MARKSHEET_LIST_CTL%>" method="post">
+
+			<table>
+				<tr>
+					<td><input type="text" name="name" value=""
+						placeholder="search by name"></td>
+					<td><input type="submit" name="operation"
+						value="<%=MarksheetCtl.OP_SEARCH%>"></td>
+				</tr>
+			</table>
 
 			<table border="1" width="100%">
 
@@ -85,7 +95,7 @@
 				}
 				%>
 
-				<%@ include file="ListFooter.jsp" %>
+				<%@ include file="ListFooter.jsp"%>
 
 
 			</table>

@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User List</title>
+<title>College List</title>
 </head>
 
 <body>
@@ -41,6 +41,16 @@
 		<h3 style="color: red"><%=error%></h3>
 
 		<form action="<%=ORSView.COLLEGE_LIST_CTL%>" method="post">
+
+			<table>
+				<tr>
+					<td><input type="text" name="name" value=""
+						placeholder="search by name"></td>
+					<td><input type="submit" name="operation"
+						value="<%=CollegeCtl.OP_SEARCH%>"></td>
+				</tr>
+			</table>
+
 
 			<table border="1" width="100%">
 

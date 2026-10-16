@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.proj4.util.MessageSource"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="in.co.rays.proj4.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Header</title>
 </head>
 <body>
 
@@ -15,6 +16,10 @@
 	String role = (String) session.getAttribute("role");
 	boolean isLogin = user != null;
 	String welcomeMsg = "Hii, ";
+
+	/* hindi english */
+	MessageSource ms = MessageSource.getInstance();
+	String locale = ms.getLanguage();
 	%>
 
 	<%
@@ -42,6 +47,7 @@
 
 
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=logout"%>">Logout</a> |
+	<a href="<%=ORSView.CHANGE_PASSWORD_CTL%>">Change Password</a> |
 
 	<%
 	} else {
@@ -55,6 +61,22 @@
 	%>
 
 	<a href="<%=ORSView.WELCOME_CTL%>">Welcome</a>
+
+	<div align="right">
+		<!-- Language Dropdown -->
+		<td style="width: 120px; text-align: center;">
+
+			<form style="margin: 0;">
+				<select name="lang" onchange="this.form.submit()">
+
+					<option value="en" <%=("en".equals(locale)) ? "selected" : ""%>>English</option>
+					<option value="hi" <%=("hi".equals(locale)) ? "selected" : ""%>>Hindi</option>
+
+				</select>
+			</form>
+		</td>
+
+	</div>
 
 	<hr>
 

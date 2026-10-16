@@ -8,21 +8,18 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @WebServlet("/ctl/CourseListCtl")
 public class CourseListCtl extends BaseListCtl<CourseBean, CourseModel> {
-	
+
 	@Override
 	protected CourseBean populateBean(HttpServletRequest request) {
-		
+
 		CourseBean bean = new CourseBean();
-		
-		
-		bean.setName(DataUtility.getString(request.getParameter("name")));
+
+		bean.setName(DataUtility.getString(request.getParameter("courseName")));
 		bean.setDescription(DataUtility.getString(request.getParameter("description")));
 		bean.setDuration(DataUtility.getString(request.getParameter("duration")));
-		
-		return super.populateBean(request);
+
+		return bean;
 	}
-	
-	
 
 	@Override
 	public CourseModel getModel() {

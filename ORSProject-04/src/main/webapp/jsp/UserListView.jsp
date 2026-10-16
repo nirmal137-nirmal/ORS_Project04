@@ -1,4 +1,5 @@
 
+<%@page import="in.co.rays.proj4.controller.UserCtl"%>
 <%@page import="in.co.rays.proj4.controller.UserListCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
@@ -40,6 +41,18 @@
 		<h3 style="color: red"><%=error%></h3>
 
 		<form action="<%=ORSView.USER_LIST_CTL%>" method="post">
+
+			<table>
+				<tr>
+					<td><input type="text" name="firstName" value=""
+						placeholder="search by firstName"></td>
+					<td><input type="text" name="lastName" value=""
+						placeholder="search by lastName"></td>
+					<td><input type="submit" name="operation"
+						value="<%=UserCtl.OP_SEARCH%>"></td>
+				</tr>
+			</table>
+
 
 			<table border="1" width="100%">
 

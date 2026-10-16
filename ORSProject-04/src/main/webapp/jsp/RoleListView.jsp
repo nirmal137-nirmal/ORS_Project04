@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.proj4.controller.RoleCtl"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="in.co.rays.proj4.bean.RoleBean"%>
 <%@page import="java.util.Iterator"%>
@@ -9,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Role List</title>
 </head>
 <body>
 	<%
@@ -17,9 +18,9 @@
 	String error = ServletUtility.getErrorMessage(request);
 
 	List<RoleBean> list = ServletUtility.getList(request);
-	
+
 	List<RoleBean> nextList = (List<RoleBean>) request.getAttribute("nextList");
-	
+
 	int pageNo = ServletUtility.getPageNo(request);
 	int pageSize = ServletUtility.getPageSize(request);
 	int index = (pageNo - 1) * pageSize + 1;
@@ -34,6 +35,16 @@
 		<h3 style="color: red"><%=error%></h3>
 
 		<form action="<%=ORSView.ROLE_LIST_CTL%>" method="post">
+
+			<table>
+				<tr>
+					<th>Name</th>
+					<td><input type="text" name="name" value=""
+						placeholder="search by name"> <input type="submit"
+						name="operation" value="<%=RoleCtl.OP_SEARCH%>"></td>
+				</tr>
+			</table>
+
 
 			<table border="1px" width="100%">
 
@@ -56,7 +67,7 @@
 					<td><input type="checkbox" name="ids"
 						value="<%=bean.getId()%>"></td>
 					<td><%=index++%></td>
-					<td><%=bean.getId() %></td>
+					<td><%=bean.getId()%></td>
 					<td><%=bean.getName()%></td>
 					<td><%=bean.getDescription()%></td>
 					<td><a href="<%=ORSView.ROLE_CTL + "?id=" + bean.getId()%>">Edit</a></td>

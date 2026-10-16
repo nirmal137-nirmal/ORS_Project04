@@ -48,7 +48,7 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 		int pageSize = 5;
 
 		if (OP_DELETE.equalsIgnoreCase(op)) {
-			
+
 			pageNo = DataUtility.getInt(request.getParameter("pageNo"));
 
 			String[] ids = request.getParameterValues("ids");
@@ -70,6 +70,10 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 		if (OP_PREVIOUS.equalsIgnoreCase(op)) {
 			pageNo = DataUtility.getInt(request.getParameter("pageNo"));
 			pageNo--;
+		}
+
+		if (OP_SEARCH.equalsIgnoreCase(op)) {
+			pageNo = 1;
 		}
 
 		List<B> list = model.search(bean, pageNo, pageSize);

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="in.co.rays.proj4.controller.FacultyCtl"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
@@ -7,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Faculty List</title>
 </head>
 <body>
 
@@ -36,6 +37,18 @@
 		<h3 style="color: red"><%=error%></h3>
 
 		<form action="<%=ORSView.FACULTY_LIST_CTL%>" method="post">
+
+			<table>
+				<tr>
+					<td><input type="text" name="firstName" value=""
+						placeholder="search by firstName"></td>
+					<td><input type="text" name="lastName" value=""
+						placeholder="search by lastName"></td>
+					<td><input type="submit" name="operation"
+						value="<%=FacultyCtl.OP_SEARCH%>"></td>
+				</tr>
+			</table>
+
 
 			<table border="1" width="100%">
 
@@ -79,7 +92,7 @@
 					<td><%=bean.getCollegeId()%></td>
 					<td><%=bean.getGender()%></td>
 					<td><%=bean.getDateOfBirth()%></td>
-					
+
 					<td><a href="<%=ORSView.FACULTY_CTL + "?id=" + bean.getId()%>">Edit</a></td>
 
 
