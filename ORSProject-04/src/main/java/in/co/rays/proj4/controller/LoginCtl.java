@@ -26,7 +26,7 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 		// Default true kr rkha hai //flag bhi kahete h
 		boolean pass = true;
 
-		//
+		
 		if (DataValidator.isNull(request.getParameter("login"))) {
 			request.setAttribute("login", "login is required");
 			pass = false;
@@ -80,7 +80,7 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 		RoleModel rmodel = new RoleModel();
 		
 		HttpSession session = request.getSession();
-
+		
 		if (OP_SIGNIN.equalsIgnoreCase(op)) {
 			
 			bean = model.authenticate(bean.getLogin(), bean.getPassword());

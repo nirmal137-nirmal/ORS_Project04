@@ -33,7 +33,8 @@
 				</tr>
 
 				<tr>
-					<th align="left"><%=ms.get("login.password")%><font color="red">*</font></th>
+					<th align="left"><%=ms.get("login.password")%><font
+						color="red">*</font></th>
 					<td><input type="password" name="password"
 						placeholder="enter you password" value=""></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("password", request)%></td>
@@ -48,7 +49,7 @@
 			</table>
 
 			<p>
-				<a href="<%=ORSView.FORGET_PASSWORD_CTL%>">ForgetPassword</a>
+				<a href="<%=ORSView.FORGET_PASSWORD_CTL%>"><%=ms.get("login.forgotpassword")%></a>
 			</p>
 
 		</form>
