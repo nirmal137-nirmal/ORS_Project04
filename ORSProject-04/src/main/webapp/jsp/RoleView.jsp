@@ -1,73 +1,114 @@
+
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="in.co.rays.proj4.controller.RoleCtl"%>
 <%@page import="in.co.rays.proj4.util.DataUtility"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="in.co.rays.proj4.controller.BaseCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
+
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add-Role</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Role - ORS</title>
+
+<!-- Bootstrap CSS CDN only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
 </head>
-<body>
 
-	<!-- bean ko view pe get kr skte hai -->
-	<jsp:useBean id="bean" class="in.co.rays.proj4.bean.RoleBean"
-		scope="request">
-	</jsp:useBean>
+<body class="bg-light">
 
+<jsp:useBean id="bean" class="in.co.rays.proj4.bean.RoleBean"
+    scope="request"></jsp:useBean>
 
-	<%
-	String succ = ServletUtility.getSuccessMessage(request);
-	String error = ServletUtility.getErrorMessage(request);
+<%
+String succ = ServletUtility.getSuccessMessage(request);
+String error = ServletUtility.getErrorMessage(request);
+%>
 
-	/*  bean ko view pe get kr skte hai */
-	/*  RoleBean bean = (RoleBean) request.getAttribute("bean"); */
-	%>
-	<%@ include file="Header.jsp"%>
+<%@ include file="Header.jsp"%>
 
-	<div align="center">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
 
-		<h1><%=bean != null && bean.getId() > 0 ? "Update Role" : "Add Role"%></h1>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
 
-		<h3 style="color: green"><%=succ%></h3>
-		<h3 style="color: red"><%=error%></h3>
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-1 fw-bold">
+                        <%=bean != null && bean.getId() > 0 ? "Update Role" : "Add Role"%>
+                    </h3>
+                    <p class="mb-0 small">Manage ORS roles</p>
+                </div>
 
-		<form action="<%=ORSView.ROLE_CTL%>" method="post">
+                <div class="card-body p-4">
 
-			<input type="hidden" name="id"
-				value="<%=DataUtility.getStringData(bean.getId())%>">
+                    <% if (succ != null && !succ.isEmpty()) { %>
+                    <div class="alert alert-success" role="alert">
+                        <%=succ%>
+                    </div>
+                    <% } %>
 
+                    <% if (error != null && !error.isEmpty()) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%=error%>
+                    </div>
+                    <% } %>
 
-			<table>
+                    <form action="<%=ORSView.ROLE_CTL%>" method="post">
 
-				<tr>
-					<th align="left">Name<font color="red">*</font></th>
-					<td><input type="text" name="name"
-						value="<%=DataUtility.getStringData(bean.getName())%>"
-						placeholder="enter role name"></td>
-					<td style="color: red"><%=ServletUtility.getErrorMessage("name", request)%></td>
-				</tr>
+                        <input type="hidden" name="id"
+                            value="<%=DataUtility.getStringData(bean.getId())%>">
 
-				<tr>
-					<th align="left">Description<font color="red">*</font></th>
-					<td><input type="text" name="description"
-						value="<%=DataUtility.getStringData(bean.getDescription())%>"
-						placeholder="enter role description"></td>
-					<td style="color: red"><%=ServletUtility.getErrorMessage("description", request)%></td>
-				</tr>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                Name <span class="text-danger">*</span>
+                            </label>
 
-				<tr>
-					<th></th>
-					<td><input type="submit" name="operation"
-						value="<%=BaseCtl.OP_SAVE%>"></td>
-				</tr>
+                            <input type="text" name="name"
+                                class="form-control"
+                                value="<%=DataUtility.getStringData(bean.getName())%>"
+                                placeholder="Enter role name">
 
-			</table>
-		</form>
-	</div>
+                            <div class="text-danger small mt-1">
+                                <%=ServletUtility.getErrorMessage("name", request)%>
+                            </div>
+                        </div>
 
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Description <span class="text-danger">*</span>
+                            </label>
 
-	<%@ include file="Footer.jsp"%>
+                            <input type="text" name="description"
+                                class="form-control"
+                                value="<%=DataUtility.getStringData(bean.getDescription())%>"
+                                placeholder="Enter role description">
+
+                            <div class="text-danger small mt-1">
+                                <%=ServletUtility.getErrorMessage("description", request)%>
+                            </div>
+                        </div>
+
+                        <button type="submit" name="operation"
+                            value="<%=BaseCtl.OP_SAVE%>"
+                            class="btn btn-primary btn-lg w-100">
+                            Save Role
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%@ include file="Footer.jsp"%>
+
 </body>
 </html>

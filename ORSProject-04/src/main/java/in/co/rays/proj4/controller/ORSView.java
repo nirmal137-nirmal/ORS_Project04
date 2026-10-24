@@ -88,4 +88,8 @@ public interface ORSView {
 	public String MARKSHEET_REPORT_VIEW = "/reports/MarksheetListReport.jrxml";
 	public String FACULTY_REPORT_VIEW = "/reports/FacultyListReport.jrxml";
 
+	public String BANK_VIEW = PAGE_FOLDER + "/BankView.jsp";
+	public String BANK_LIST_VIEW = PAGE_FOLDER + "/BankListView.jsp";
+	public String BANK_CTL = APP_CONTEXT + "/ctl/BankCtl";
+
 }

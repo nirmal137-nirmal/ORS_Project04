@@ -1,4 +1,5 @@
-           package in.co.rays.proj4.controller;
+
+package in.co.rays.proj4.controller;
 
 import java.io.IOException;
 

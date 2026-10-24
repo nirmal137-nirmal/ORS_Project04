@@ -35,6 +35,7 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 
 	public static final String MSG_SUCCESS = "success";
 	public static final String MSG_ERROR = "error";
+	
 
 	// check input data enter by user
 	protected boolean validate(HttpServletRequest request) {
@@ -132,6 +133,8 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 
 		// Email
 		getMessageSource(request);
+		
+	
 
 		if ("POST".equalsIgnoreCase(request.getMethod()) && validate(request) == false) {
 			ServletUtility.forward(getView(), request, response);
