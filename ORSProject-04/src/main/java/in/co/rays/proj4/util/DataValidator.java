@@ -1,5 +1,6 @@
 package in.co.rays.proj4.util;
 
+
 import java.util.Date;
 
 // check input data enter by user is valid or not
@@ -192,15 +193,6 @@ public class DataValidator {
 		System.out.println("Not Null  " + isNotNull("ABC"));
 		System.out.println(isNull(""));
 
-	}
-
-	public static boolean isDouble(String val) {
-		try {
-			Double.parseDouble(val);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
 	}
 
 }

@@ -39,7 +39,7 @@ public class UserModel extends BaseModel<UserBean> {
 			conn.setAutoCommit(false);
 
 			PreparedStatement pstmt = conn
-					.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			pstmt.setLong(1, pk);
 			pstmt.setString(2, bean.getFirstName());
@@ -60,6 +60,7 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setString(16, bean.getModifiedBy());
 			pstmt.setTimestamp(17, bean.getCreatedDatetime());
 			pstmt.setTimestamp(18, bean.getModifiedDatetime());
+			pstmt.setString(19, bean.getPhoto());
 
 			pstmt.executeUpdate();
 
@@ -240,10 +241,27 @@ public class UserModel extends BaseModel<UserBean> {
 		return null;
 	}
 
-	@Override
-	public String getTable() {
+	public void updatePhoto(long id, String photo) throws ApplicationException {
+		Connection conn = null;
 
-		return "st_user";
+		try {
+			conn = JDBCDataSource.getConnection();
+			conn.setAutoCommit(false); // Begin transaction
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE ST_USER SET PHOTO = ? WHERE ID = ?");
+			pstmt.setString(1, photo);
+			pstmt.setLong(2, id);
+			pstmt.executeUpdate();
+			conn.commit(); // End transaction
+			pstmt.close();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			JDBCDataSource.trnRollBack(conn);
+
+		} finally {
+
+			JDBCDataSource.closeConnection(conn);
+		}
 	}
 
 	public UserBean changePassword(String newPassword, String oldPassword, String login) {
@@ -323,6 +341,12 @@ public class UserModel extends BaseModel<UserBean> {
 		System.out.println("mail send successfully");
 
 		return pk;
+	}
+
+	@Override
+	public String getTable() {
+
+		return "st_user";
 	}
 
 	@Override

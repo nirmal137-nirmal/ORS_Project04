@@ -102,12 +102,4 @@ public class DataUtility {
 		}
 	}
 
-	public static double getDouble(String val) {
-	    if (DataValidator.isDouble(val)) {
-	        return Double.parseDouble(val);
-	    } else {
-	        return 0.0;
-	    }
-	}
-
 }

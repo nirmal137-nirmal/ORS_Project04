@@ -61,7 +61,7 @@ public interface ORSView {
 	public String MY_PROFILE_CTL = APP_CONTEXT + "/ctl/MyProfileCtl";
 	public String FORGET_PASSWORD_CTL = APP_CONTEXT + "/ForgetPasswordCtl";
 	public String MARKSHEET_MERIT_LIST_CTL = APP_CONTEXT + "/ctl/MarksheetMeritListCtl";
-	public String UPLOAD_PHOTO_CTL = APP_CONTEXT + "/ctl/uploadphoto";
+	public String UPLOAD_PHOTO_CTL = APP_CONTEXT + "/ctl/UploadPhotoCtl";
 
 	public String FACULTY_VIEW = PAGE_FOLDER + "/FacultyView.jsp";
 	public String FACULTY_LIST_VIEW = PAGE_FOLDER + "/FacultyListView.jsp";
@@ -87,9 +87,5 @@ public interface ORSView {
 	public String SUBJECT_REPORT_VIEW = "/reports/SubjectListReport.jrxml";
 	public String MARKSHEET_REPORT_VIEW = "/reports/MarksheetListReport.jrxml";
 	public String FACULTY_REPORT_VIEW = "/reports/FacultyListReport.jrxml";
-
-	public String BANK_VIEW = PAGE_FOLDER + "/BankView.jsp";
-	public String BANK_LIST_VIEW = PAGE_FOLDER + "/BankListView.jsp";
-	public String BANK_CTL = APP_CONTEXT + "/ctl/BankCtl";
 
 }
