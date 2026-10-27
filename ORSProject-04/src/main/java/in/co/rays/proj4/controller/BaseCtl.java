@@ -123,19 +123,18 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 			throws ServletException, IOException {
 		System.out.println("service method");
 
-		/*
-		 * if (request.getMethod() == "POST" && validate(request) == false) {
-		 * ServletUtility.forward(getView(), request, response); return;
-		 */
 
 		// equalsIgnoreCase Case Sensitive hoti hai
 
 		// Email
 		getMessageSource(request);
-		
-	
 
 		if ("POST".equalsIgnoreCase(request.getMethod()) && validate(request) == false) {
+			
+			//View pe get krne ke liye 
+			BaseBean bean = populateBean(request);
+			ServletUtility.setBean(bean, request);
+			
 			ServletUtility.forward(getView(), request, response);
 			return;
 		}
@@ -147,7 +146,7 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 
 	public abstract String getView();
 
-     //Email
+	// Email
 	public MessageSource getMessageSource(HttpServletRequest request) {
 		MessageSource messagesource = MessageSource.getInstance();
 		return messagesource;

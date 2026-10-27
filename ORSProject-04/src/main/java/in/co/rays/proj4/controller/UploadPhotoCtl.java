@@ -29,6 +29,11 @@ public class UploadPhotoCtl extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		long id = DataUtility.getLong(request.getParameter("id"));
+		UserModel model = new UserModel();
+		UserBean bean = model.findByPk(id);
+		ServletUtility.setBean(bean, request);
+
 		/*
 		 * RoleModel model = new RoleModel(); try { List l = model.list();
 		 * request.setAttribute("roleList", l); } catch (ApplicationException e) { }
@@ -58,11 +63,13 @@ public class UploadPhotoCtl extends HttpServlet {
 
 			if (file.exists()) {
 
+				// iMG kA koi bhi type ho jpg png ho ye le leta h
 				response.setContentType(getServletContext().getMimeType(file.getName()));
 
 				InputStream in = new java.io.FileInputStream(file);
 				OutputStream out = response.getOutputStream();
 
+				// img ki size itni honi chahiye
 				byte[] buffer = new byte[4096];
 				int bytes = in.read(buffer);
 
@@ -102,11 +109,6 @@ public class UploadPhotoCtl extends HttpServlet {
 			throws ServletException, IOException {
 
 		long id = DataUtility.getLong(request.getParameter("id"));
-		UserModel model = new UserModel();
-		UserBean bean = model.findByPk(id);
-		ServletUtility.setBean(bean, request);
-
-		// Get uploaded photo
 		Part part = request.getPart("photo");
 
 		if (part == null || part.getSize() == 0) {
@@ -149,7 +151,7 @@ public class UploadPhotoCtl extends HttpServlet {
 		output.close();
 
 		try {
-
+			UserModel model = new UserModel();
 			model.updatePhoto(id, fileName);
 			ServletUtility.setSuccessMessage("photo upload successfully", request);
 

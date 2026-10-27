@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
 <%@page import="in.co.rays.proj4.controller.LoginCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <html>
@@ -7,7 +8,8 @@
 <title>Login</title>
 </head>
 <body>
-
+	<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
+		scope="request"></jsp:useBean>
 	<%
 	String succ = ServletUtility.getSuccessMessage(request);
 	String error = ServletUtility.getErrorMessage(request);
@@ -28,7 +30,8 @@
 				<tr>
 					<th align="left"><%=ms.get("login.email")%><font color="red">*</font></th>
 					<td><input type="text" name="login"
-						placeholder="enter you login" value=""></td>
+						placeholder="enter you login"
+						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("login", request)%></td>
 				</tr>
 
@@ -36,7 +39,8 @@
 					<th align="left"><%=ms.get("login.password")%><font
 						color="red">*</font></th>
 					<td><input type="password" name="password"
-						placeholder="enter you password" value=""></td>
+						placeholder="enter you password"
+						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="color: red"><%=ServletUtility.getErrorMessage("password", request)%></td>
 				</tr>
 

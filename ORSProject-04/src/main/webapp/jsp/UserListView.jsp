@@ -48,8 +48,11 @@
 						placeholder="search by firstName"></td>
 					<td><input type="text" name="lastName" value=""
 						placeholder="search by lastName"></td>
+					<td><input type="email" name="login" value=""
+						placeholder="search by email"></td>
 					<td><input type="submit" name="operation"
 						value="<%=UserCtl.OP_SEARCH%>"></td>
+						
 				</tr>
 			</table>
 
@@ -62,7 +65,7 @@
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
 						All</th>
 					<th>S No.</th>
-					<th>Id</th>
+					<!-- <th>Id</th> -->
 					<th>Profile</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -85,7 +88,7 @@
 						value="<%=bean.getId()%>"></td>
 
 					<td><%=index++%></td>
-					<td><%=bean.getId()%></td>
+					<%-- <td><%=bean.getId()%></td> --%>
 					<td><img
 						src="<%=ORSView.UPLOAD_PHOTO_CTL + "?id=" + bean.getId()%>"
 						width="60" height="60"

@@ -26,7 +26,6 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 		// Default true kr rkha hai //flag bhi kahete h
 		boolean pass = true;
 
-		
 		if (DataValidator.isNull(request.getParameter("login"))) {
 			request.setAttribute("login", "login is required");
 			pass = false;
@@ -78,28 +77,26 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 		UserBean bean = populateBean(request);
 		UserModel model = getModel();
 		RoleModel rmodel = new RoleModel();
-		
+
 		HttpSession session = request.getSession();
-		
+
 		if (OP_SIGNIN.equalsIgnoreCase(op)) {
-			
+
 			bean = model.authenticate(bean.getLogin(), bean.getPassword());
+			if (bean != null) {
+				session.setAttribute("user", bean);
+				RoleBean rbean = rmodel.findByPk(bean.getRoleId());
+				session.setAttribute("role", rbean.getName());
 
-				if (bean != null) {
-					
-					session.setAttribute("user", bean);
-					RoleBean rbean = rmodel.findByPk(bean.getRoleId());
-					session.setAttribute("role", rbean.getName());
-					
-					ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
-					return;
-					
-				} else {
-					ServletUtility.setErrorMessage("Invalid login or password", request);
+				ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
+				return;
 
-				}
+			} else {
+				ServletUtility.setErrorMessage("Invalid login or password", request);
+			}
 		}
-
+		bean = populateBean(request);
+		ServletUtility.setBean(bean, request);
 		ServletUtility.forward(getView(), request, response);
 	}
 
