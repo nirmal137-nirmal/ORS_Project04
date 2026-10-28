@@ -103,6 +103,7 @@ public class UserRegistrationCtl extends BaseCtl<UserBean, UserModel> {
 				ServletUtility.setErrorMessage("Login id already exists", request);
 			}
 		}
+		bean = populateBean(request);
 		ServletUtility.setBean(bean, request);
 		ServletUtility.forward(getView(), request, response);
 

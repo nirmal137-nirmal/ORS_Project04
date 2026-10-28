@@ -79,7 +79,7 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 
 		List<B> list = model.search(bean, pageNo, pageSize);
 		
-		// Next Page ke lite 
+		// Next Page ke liye 
 		List<B> nextList = model.search(bean, pageNo + 1, pageSize);
 		request.setAttribute("nextList", nextList);
 		

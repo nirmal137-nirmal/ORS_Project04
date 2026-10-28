@@ -1,4 +1,3 @@
-
 <%@page import="in.co.rays.proj4.controller.UserCtl"%>
 <%@page import="in.co.rays.proj4.controller.UserListCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>

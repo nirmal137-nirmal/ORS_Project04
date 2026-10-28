@@ -95,8 +95,11 @@ public class LoginCtl extends BaseCtl<UserBean, UserModel> {
 				ServletUtility.setErrorMessage("Invalid login or password", request);
 			}
 		}
+		
+		// fields already fill request se form ka data lekar Bean object mein set karna.
 		bean = populateBean(request);
 		ServletUtility.setBean(bean, request);
+		
 		ServletUtility.forward(getView(), request, response);
 	}
 
