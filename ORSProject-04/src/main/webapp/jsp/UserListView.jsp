@@ -1,3 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.util.HTMLUtility"%>
 <%@page import="in.co.rays.proj4.controller.UserCtl"%>
 <%@page import="in.co.rays.proj4.controller.UserListCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
@@ -15,6 +18,8 @@
 </head>
 
 <body>
+	<jsp:useBean id="gbean" class="in.co.rays.proj4.bean.UserBean"
+		scope="request"></jsp:useBean>
 
 	<%
 	String succ = ServletUtility.getSuccessMessage(request);
@@ -29,9 +34,15 @@
 	int index = (pageNo - 1) * pageSize + 1;
 
 	Iterator<UserBean> it = list.iterator();
+
+	HashMap<String, String> map = new HashMap<String, String>();
+	map.put("Male", "Male");
+	map.put("Female", "Female");
+	map.put("Other", "Other");
 	%>
 
 	<%@ include file="Header.jsp"%>
+
 
 	<div align="center">
 
@@ -43,15 +54,20 @@
 
 			<table>
 				<tr>
+					<th>First Name</th>
 					<td><input type="text" name="firstName" value=""
 						placeholder="search by firstName"></td>
+					<th>Last Name</th>
 					<td><input type="text" name="lastName" value=""
 						placeholder="search by lastName"></td>
+					<th>Email</th>
 					<td><input type="email" name="login" value=""
 						placeholder="search by email"></td>
+					<th>Gender</th>
+					<td><%=HTMLUtility.getList("gender", DataUtility.getStringData(gbean.getGender()), map)%></td>
 					<td><input type="submit" name="operation"
 						value="<%=UserCtl.OP_SEARCH%>"></td>
-						
+
 				</tr>
 			</table>
 
@@ -60,12 +76,13 @@
 
 				<tr style="background-color: #6FA7A0;">
 
+					<!-- Java Script ka event use kara hai  -->
 					<th><input type="checkbox"
 						onclick="document.querySelectorAll('input[name=ids]').forEach(c=>c.checked=this.checked)">Select
 						All</th>
 					<th>S No.</th>
 					<!-- <th>Id</th> -->
-					<th>Profile</th>
+					 <th>Profile</th> 
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Login</th>
@@ -110,7 +127,9 @@
 			</table>
 
 			<table width="100%">
+			
 				<input type="hidden" name="pageNo" value="<%=pageNo%>">
+				
 				<tr>
 					<td><input type="submit" name="operation"
 						<%=pageNo == 1 ? "disabled" : ""%>

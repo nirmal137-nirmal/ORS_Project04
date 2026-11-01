@@ -13,7 +13,7 @@ public class CollegeBean extends BaseBean {
 	@Override
 	public String getValue() {
 		
-		return null;
+		return name;
 	}
 
 	public String getName() {

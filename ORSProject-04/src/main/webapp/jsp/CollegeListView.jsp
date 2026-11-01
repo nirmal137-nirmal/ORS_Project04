@@ -44,6 +44,7 @@
 
 			<table>
 				<tr>
+				<th>College Name</th>
 					<td><input type="text" name="name" value=""
 						placeholder="search by name"></td>
 					<td><input type="submit" name="operation"

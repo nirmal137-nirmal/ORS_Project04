@@ -2,6 +2,7 @@ package in.co.rays.proj4.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.exception.ApplicationException;
@@ -105,10 +106,10 @@ public class RoleModel extends BaseModel<RoleBean> {
 				sql.append(" and modified_by like '" + bean.getModifiedBy() + "%'");
 			}
 			if (bean.getCreatedDatetime() != null) {
-				sql.append(" and createddatetime like '" + bean.getCreatedDatetime() + "%'");
+				sql.append(" and created_datetime like '" + bean.getCreatedDatetime() + "%'");
 			}
 			if (bean.getModifiedDatetime() != null) {
-				sql.append(" and modifieddatetime like '" + bean.getModifiedDatetime() + "%'");
+				sql.append(" and modified_datetime like '" + bean.getModifiedDatetime() + "%'");
 			}
 		}
 		return sql.toString();
@@ -132,5 +133,7 @@ public class RoleModel extends BaseModel<RoleBean> {
 
 		return new RoleBean();
 	}
+
+	
 
 }

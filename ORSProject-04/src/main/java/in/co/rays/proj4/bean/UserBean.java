@@ -145,7 +145,7 @@ public class UserBean extends BaseBean {
 	@Override
 	public String getValue() {
 
-		return null;
+		return gender;
 	}
 
 	@Override

@@ -43,10 +43,14 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 
 	// data loaded at the time of HTML page loaded in drop-down list
 	protected void preload(HttpServletRequest request) {
+		
+		
 	}
 
 	// get data from view using request.getParameter() method and set into the bean
 	protected B populateBean(HttpServletRequest request) {
+		
+		
 		return null;
 	}
 
@@ -114,6 +118,9 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 			ServletUtility.setErrorMessage("record already exist", request);
 		}
 
+		bean = populateBean(request);
+		ServletUtility.setBean(bean, request);	
+		
 		ServletUtility.forward(getView(), request, response);
 
 	}
@@ -123,7 +130,11 @@ public abstract class BaseCtl<B extends BaseBean, M extends BaseModel> extends H
 			throws ServletException, IOException {
 		System.out.println("service method");
 
-
+		
+		//preload
+         preload(request);
+         
+         
 		// equalsIgnoreCase Case Sensitive hoti hai
 
 		// Email

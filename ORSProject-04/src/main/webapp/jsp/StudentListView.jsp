@@ -41,8 +41,10 @@
 
 			<table>
 				<tr>
+				<th>First Name</th>
 					<td><input type="text" name="firstName" value=""
 						placeholder="search by firstName"></td>
+						<th>Last Name</th>
 					<td><input type="text" name="lastName" value=""
 						placeholder="search by lastName"></td>
 					<td><input type="submit" name="operation"

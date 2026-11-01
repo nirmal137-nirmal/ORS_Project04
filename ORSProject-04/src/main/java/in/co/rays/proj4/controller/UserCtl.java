@@ -1,6 +1,11 @@
 package in.co.rays.proj4.controller;
 
+import java.util.List;
+
+import in.co.rays.proj4.bean.BaseBean;
+import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.model.RoleModel;
 import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
@@ -11,6 +16,16 @@ import jakarta.servlet.http.HttpServletRequest;
 public class UserCtl extends BaseCtl<UserBean, UserModel> {
 
 	// public static final String OP_SAVE = "Save";
+
+	@Override
+	protected void preload(HttpServletRequest request) {
+
+		RoleModel rmodel = new RoleModel();
+		List<RoleBean> roleList = rmodel.search(null, 0, 0);
+		request.setAttribute("roleList", roleList);
+		
+		super.preload(request);
+	}
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {

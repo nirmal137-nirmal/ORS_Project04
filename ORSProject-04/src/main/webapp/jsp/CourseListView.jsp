@@ -39,6 +39,7 @@
 
 			<table>
 				<tr>
+				<th>College Name</th>
 					<td><input type="text" name="courseName" value=""
 						placeholder="search by courseName"></td>
 					<td><input type="submit" name="operation"

@@ -1,13 +1,16 @@
+
 package in.co.rays.proj4.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
+import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.model.RoleModel;
 import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
@@ -29,30 +32,36 @@ public class UploadPhotoCtl extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		long id = DataUtility.getLong(request.getParameter("id"));
-		UserModel model = new UserModel();
-		UserBean bean = model.findByPk(id);
-		ServletUtility.setBean(bean, request);
-
-		/*
-		 * RoleModel model = new RoleModel(); try { List l = model.list();
-		 * request.setAttribute("roleList", l); } catch (ApplicationException e) { }
-		 */
+		RoleModel model = new RoleModel();
+		try {
+			List l = model.search(null, 0, 0);
+			request.setAttribute("roleList", l);
+		} catch (ApplicationException e) {
+		}
 
 		super.service(request, response);
+
+		/*
+		 * RoleModel model = new RoleModel();
+		 * 
+		 * List<RoleBean> roleList = model.search(null, 0, 0);
+		 * 
+		 * request.setAttribute("roleList", roleList);
+		 * 
+		 * super.service(request, response);
+		 */
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println("upload ctl do get");
+
 		long id = DataUtility.getLong(request.getParameter("id"));
 
 		UserModel model = new UserModel();
-
-		UserBean bean = null;
-
-		bean = model.findByPk(id);
+		UserBean bean = model.findByPk(id);
 
 		String photoPath = PropertyReader.getValue("photoPath");
 
@@ -63,45 +72,42 @@ public class UploadPhotoCtl extends HttpServlet {
 
 			if (file.exists()) {
 
-				// iMG kA koi bhi type ho jpg png ho ye le leta h
 				response.setContentType(getServletContext().getMimeType(file.getName()));
 
-				InputStream in = new java.io.FileInputStream(file);
-				OutputStream out = response.getOutputStream();
+				try (InputStream in = new java.io.FileInputStream(file);
+						OutputStream out = response.getOutputStream()) {
 
-				// img ki size itni honi chahiye
-				byte[] buffer = new byte[4096];
-				int bytes = in.read(buffer);
+					byte[] buffer = new byte[4096];
+					int ch;
 
-				while (bytes != -1) {
-					out.write(buffer, 0, bytes);
-					bytes = in.read(buffer);
+					while ((ch = in.read(buffer)) != -1) {
+						out.write(buffer, 0, ch);
+					}
+					out.flush();
 				}
-
-				in.close();
-				out.close();
 
 				return;
 			}
 		}
 
 		// Get Default photo
-		InputStream in = getServletContext().getResourceAsStream("/img/logo.png");
+		try (InputStream in = getServletContext().getResourceAsStream("/img/logo.png")) {
 
-		response.setContentType("image/png");
+			response.setContentType("image/png");
 
-		OutputStream out = response.getOutputStream();
+			if (in != null) {
+				OutputStream out = response.getOutputStream();
 
-		byte[] buffer = new byte[4096];
-		int bytes = in.read(buffer);
+				byte[] buffer = new byte[4096];
+				int ch;
 
-		while (bytes != -1) {
-			out.write(buffer, 0, bytes);
-			bytes = in.read(buffer);
+				while ((ch = in.read(buffer)) != -1) {
+					out.write(buffer, 0, ch);
+				}
+
+				out.flush();
+			}
 		}
-
-		in.close();
-		out.close();
 	}
 
 	@Override
@@ -109,6 +115,7 @@ public class UploadPhotoCtl extends HttpServlet {
 			throws ServletException, IOException {
 
 		long id = DataUtility.getLong(request.getParameter("id"));
+
 		Part part = request.getPart("photo");
 
 		if (part == null || part.getSize() == 0) {
@@ -123,10 +130,9 @@ public class UploadPhotoCtl extends HttpServlet {
 
 		String photoPath = PropertyReader.getValue("photoPath");
 
-		System.out.println("folder path: " + photoPath);
-
 		File folder = new File(photoPath);
 
+		System.out.println("folder path: " + photoPath);
 		System.out.println("folder: " + folder.getAbsolutePath());
 
 		if (!folder.exists()) {
@@ -135,30 +141,25 @@ public class UploadPhotoCtl extends HttpServlet {
 
 		File destFile = new File(folder, fileName);
 
-		InputStream input = part.getInputStream();
-		FileOutputStream output = new FileOutputStream(destFile);
-
-		byte[] buffer = new byte[4096];
-
-		int bytesRead = input.read(buffer);
-
-		while (bytesRead != -1) {
-			output.write(buffer, 0, bytesRead);
-			bytesRead = input.read(buffer);
-		}
-
-		input.close();
-		output.close();
+		part.write(destFile.getAbsolutePath());
 
 		try {
 			UserModel model = new UserModel();
+
 			model.updatePhoto(id, fileName);
+			
+			// 
+			UserBean userBean = model.findByPk(id);
+			request.setAttribute("bean", userBean);
+
 			ServletUtility.setSuccessMessage("photo upload successfully", request);
 
 			System.out.println("Photo uploaded successfully: " + fileName);
 
 		} catch (ApplicationException e) {
+
 			e.printStackTrace();
+
 			ServletUtility.setErrorMessage("Photo upload failed", request);
 			ServletUtility.forward(getView(), request, response);
 			return;
@@ -170,5 +171,4 @@ public class UploadPhotoCtl extends HttpServlet {
 	public String getView() {
 		return ORSView.USER_VIEW;
 	}
-
 }

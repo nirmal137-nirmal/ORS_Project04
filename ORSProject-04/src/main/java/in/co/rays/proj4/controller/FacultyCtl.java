@@ -1,14 +1,27 @@
 package in.co.rays.proj4.controller;
 
+import java.util.List;
+
+import in.co.rays.proj4.bean.CollegeBean;
 import in.co.rays.proj4.bean.FacultyBean;
+import in.co.rays.proj4.model.CollegeModel;
 import in.co.rays.proj4.model.FacultyModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
+import in.co.rays.proj4.util.ServletUtility;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 @WebServlet("/ctl/FacultyCtl")
 public class FacultyCtl extends BaseCtl<FacultyBean, FacultyModel> {
+
+	@Override
+	protected void preload(HttpServletRequest request) {
+		CollegeModel cmodel = new CollegeModel();
+		List<CollegeBean> CollegeList = cmodel.search(null, 0, 0);
+		// request.setAttribute("facultyList", CollegeList);
+		ServletUtility.setList(CollegeList, request);
+	}
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
