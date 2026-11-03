@@ -1,15 +1,28 @@
 package in.co.rays.proj4.controller;
 
+import java.util.List;
+
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.model.RoleModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
+import in.co.rays.proj4.util.ServletUtility;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @WebServlet("/ctl/RoleCtl")
 public class RoleCtl extends BaseCtl<RoleBean, RoleModel> {
+
+	@Override
+	protected void preload(HttpServletRequest request) {
+
+		RoleModel rmodel = new RoleModel();
+		RoleBean bean = populateBean(request);
+		//request.setAttribute("roleList", roleList);
+		
+		ServletUtility.setBean(bean, request);
+
+	}
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {

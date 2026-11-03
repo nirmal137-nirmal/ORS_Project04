@@ -22,8 +22,9 @@ public class UserCtl extends BaseCtl<UserBean, UserModel> {
 
 		RoleModel rmodel = new RoleModel();
 		List<RoleBean> roleList = rmodel.search(null, 0, 0);
+		//rmodel.findByPk();
 		request.setAttribute("roleList", roleList);
-		
+
 		super.preload(request);
 	}
 

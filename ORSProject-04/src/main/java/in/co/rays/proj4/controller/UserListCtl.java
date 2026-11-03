@@ -10,18 +10,16 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @WebServlet("/ctl/UserListCtl")
 public class UserListCtl extends BaseListCtl<UserBean, UserModel> {
-	
-	/*
-	 * @Override protected void preload(HttpServletRequest request) {
-	 * 
-	 * UserModel model = new UserModel(); List<UserBean> userlist
-	 * =model.search(null, 0, 0);
-	 * 
-	 * request.setAttribute("userList", userlist);
-	 * 
-	 * 
-	 * }
-	 */
+
+	@Override
+	protected void preload(HttpServletRequest request) {
+
+		UserModel model = new UserModel();
+		List<UserBean> userlist = model.search(null, 0, 0);
+
+		request.setAttribute("userList", userlist);
+
+	}
 
 	@Override
 	protected UserBean populateBean(HttpServletRequest request) {

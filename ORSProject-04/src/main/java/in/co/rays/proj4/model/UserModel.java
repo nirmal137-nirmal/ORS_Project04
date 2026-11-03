@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 
+import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -27,10 +28,9 @@ public class UserModel extends BaseModel<UserBean> {
 		}
 
 		/*
-		 * RoleModel rmodel = new RoleModel(); RoleBean rbean =
+		 * //role name column RoleModel rmodel = new RoleModel(); RoleBean rbean =
 		 * rmodel.findByPk(bean.getId());
 		 */
-
 		try {
 
 			pk = nextPk();
@@ -40,7 +40,6 @@ public class UserModel extends BaseModel<UserBean> {
 
 			PreparedStatement pstmt = conn
 					.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
 			pstmt.setLong(1, pk);
 			pstmt.setString(2, bean.getFirstName());
 			pstmt.setString(3, bean.getLastName());
@@ -48,6 +47,7 @@ public class UserModel extends BaseModel<UserBean> {
 			pstmt.setString(5, bean.getPassword());
 			pstmt.setDate(6, new java.sql.Date(bean.getDob().getTime()));
 			pstmt.setString(7, bean.getMobileNo());
+			//rolename column
 			pstmt.setLong(8, bean.getRoleId());
 			pstmt.setInt(9, bean.getUnsuccessfullLogin());
 			pstmt.setString(10, bean.getGender());
@@ -166,7 +166,7 @@ public class UserModel extends BaseModel<UserBean> {
 				sql.append(" and password like '" + bean.getPassword() + "%'");
 			}
 
-			if (bean.getDob() != null) {
+			if (bean.getDob() != null && bean.getDob().getDate() > 0) {
 				sql.append(" and dob = '" + bean.getDob() + "'");
 			}
 

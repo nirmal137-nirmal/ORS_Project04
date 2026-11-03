@@ -49,7 +49,7 @@ public abstract class BaseListCtl<B extends BaseBean, M extends BaseModel> exten
 
 		if (OP_DELETE.equalsIgnoreCase(op)) {
 
-			//pageNo = DataUtility.getInt(request.getParameter("pageNo"));
+			pageNo = DataUtility.getInt(request.getParameter("pageNo"));
 			String[] ids = request.getParameterValues("ids");
 			
 			

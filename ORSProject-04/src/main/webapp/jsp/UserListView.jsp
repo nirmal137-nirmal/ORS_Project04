@@ -1,3 +1,5 @@
+<%@page import="in.co.rays.proj4.model.RoleModel"%>
+<%@page import="in.co.rays.proj4.bean.RoleBean"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="in.co.rays.proj4.util.DataUtility"%>
 <%@page import="in.co.rays.proj4.util.HTMLUtility"%>
@@ -39,6 +41,8 @@
 	map.put("Male", "Male");
 	map.put("Female", "Female");
 	map.put("Other", "Other");
+
+	
 	%>
 
 	<%@ include file="Header.jsp"%>
@@ -82,12 +86,13 @@
 						All</th>
 					<th>S No.</th>
 					<!-- <th>Id</th> -->
-					 <th>Profile</th> 
+					<th>Profile</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Login</th>
 					<th>DOB</th>
-					<th>Role ID</th>
+					<!-- <th>Role ID</th> -->
+					<th>Role Name</th>
 					<th>Gender</th>
 					<th>Edit</th>
 				</tr>
@@ -96,6 +101,12 @@
 				while (it.hasNext()) {
 
 					UserBean bean = it.next();
+					
+					/* For add column Role Name */
+					RoleBean rbean = new RoleBean();
+					RoleModel rmodel = new RoleModel();
+					rbean = rmodel.findByPk(bean.getRoleId());
+					
 				%>
 
 				<tr align="center" style="background-color: rgb(192, 192, 192);">
@@ -109,11 +120,13 @@
 						src="<%=ORSView.UPLOAD_PHOTO_CTL + "?id=" + bean.getId()%>"
 						width="60" height="60"
 						style="object-fit: cover; border-radius: 50%; border: 1px solid #ccc;"></td>
+					<%-- <th><%=rbean.get%></th> --%>
 					<td><%=bean.getFirstName()%></td>
 					<td><%=bean.getLastName()%></td>
 					<td><%=bean.getLogin()%></td>
 					<td><%=bean.getDob()%></td>
-					<td><%=bean.getRoleId()%></td>
+					<%-- <td><%=bean.getRoleId() %></td> --%>
+					<td><%=rbean.getName()%></td>
 					<td><%=bean.getGender()%></td>
 
 					<td><a href="<%=ORSView.USER_CTL + "?id=" + bean.getId()%>">Edit</a></td>
@@ -127,9 +140,9 @@
 			</table>
 
 			<table width="100%">
-			
+
 				<input type="hidden" name="pageNo" value="<%=pageNo%>">
-				
+
 				<tr>
 					<td><input type="submit" name="operation"
 						<%=pageNo == 1 ? "disabled" : ""%>
