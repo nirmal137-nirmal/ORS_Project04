@@ -1,6 +1,3 @@
-# ORS_Project04
-
-
 # Online Result System (ORS) – Project 4
 
 ## Introduction
